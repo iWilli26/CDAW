@@ -1,5 +1,5 @@
 <?php
-
+require_once("initPDO.php");
 // returns true if $tableName exists
 function tableExists($dbh, $tableName)
 {
