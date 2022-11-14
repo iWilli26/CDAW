@@ -1,0 +1,39 @@
+// Update the VARIANT arg in docker-compose.yml to pick a PHP version
+{
+	"name": "UV_CDAW",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspace",
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": {
+		"sqltools.connections": [{
+			"name": "MySQL",
+			"driver": "MySQL",
+			"server": "localhost",
+			"previewLimit": 50,
+			"port": 5306,
+			"database": "test",
+			"username": "root",
+			"password": "root"
+		}]
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"felixfbecker.php-debug",
+		"felixfbecker.php-intellisense",
+		"mrmlnc.vscode-apache"
+		// "mtxr.sqltools",
+		// "mtxr.sqltools-driver-mysql"
+	],
+
+	// For use with PHP or Apache (e.g.php -S localhost:8080 or apache2ctl start)
+	// "forwardPorts": [8080, 8081, 3306],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "sudo chmod a+x \"$(pwd)\" && sudo rm -rf /var/www/html && sudo ln -s \"$(pwd)\" /var/www/html"
+
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode"
+}

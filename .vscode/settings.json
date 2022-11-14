@@ -1,0 +1,17 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5306,
+            "driver": "MySQL",
+            "name": "vscode_mysql",
+            "database": "test",
+            "username": "mysql",
+            "password": "mysql"
+        }
+    ]
+}
