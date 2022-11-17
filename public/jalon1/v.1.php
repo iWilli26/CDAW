@@ -3,6 +3,7 @@ class Pokedex
 {
     private $count;
     public $pokemon = array();
+    private $offset = 386;
     private function fetch($url)
     {
         $ch = curl_init();
@@ -15,8 +16,8 @@ class Pokedex
     }
     public function __construct()
     {
-        $this->count = 1;
-        $this->data = $this->fetch('https://pokeapi.co/api/v2/pokemon?limit=10&offset=0');
+        $this->count = $this->offset+1;
+        $this->data = $this->fetch('https://pokeapi.co/api/v2/pokemon?limit=100&offset=' . $this->offset);
         foreach ($this->data['results'] as $pokemon) {
             $this->pokemon[$this->count] = new Pokemon($this->count, $pokemon['name'], 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' . $this->count . '.png');
             $this->count++;
@@ -72,3 +73,9 @@ class Pokemon
 </body>
 
 </html>
+<style scoped>
+img:hover {
+    transform: scale(1.5);
+    transition: 0.5s;
+}
+</style>
