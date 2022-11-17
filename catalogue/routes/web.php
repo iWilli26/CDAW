@@ -16,9 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/bruh/{name}/{age}', function ($name, $age) {
     return $name . ' a ' . $age . ' ans';
-})->where(['age' => '^[0-9]*$', 'name', '^[a-zA-Z]+$']);;
-Route::get('/template', function () {
-    return view('template');
+})->where(['age' => '^[0-9]*$', 'name', '^[a-zA-Z]+$']);
+
+Route::get('/listPokemon', function () {
+    return view('listPokemon');
 });
