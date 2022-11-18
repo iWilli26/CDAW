@@ -2,18 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Energy extends Model
+class Pokemon extends Model
 {
-    use HasFactory;
+    /**
+     * Get the energy associated with the pokemon.
+     */
+    public function energy()
+    {
+        return $this->hasOne(Energy::class);
+    }
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'energy';
+    protected $table = 'pokemon';
     /**
      * The database connection that should be used by the model.
      *
@@ -25,7 +30,7 @@ class Energy extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'energy_id';
+    protected $primaryKey = 'pokemon_id';
     /**
      * The attributes that are mass assignable.
      *
@@ -33,5 +38,11 @@ class Energy extends Model
      */
     protected $fillable = [
         'name',
+        'pv_max',
+        'level',
+        'image',
+        'attack',
+        'special_defense',
+        'special_attack',
     ];
 }

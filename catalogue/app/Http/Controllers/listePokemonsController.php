@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\DB;
+use App\Models\Energy;
 
 class listePokemonsController extends Controller
 {
+
     public static function getSinglePokemon($name)
     {
         // $client = new Client();
@@ -19,11 +22,15 @@ class listePokemonsController extends Controller
         // echo $res->getBody();
 
         $response = Http::get('https://pokeapi.co/api/v2/pokemon/' . $name);
+
+        // foreach (Energy::all() as $energy) {
+        //     echo $energy->name;
+        // }
         return $response->object();
     }
-    public static function getLotPokemon()
+    public static function getAll()
     {
-        $response = Http::get('https://pokeapi.co/api/v2/pokemon?limit=100&offset=0');
-        return $response->object();
+        $pokemons = DB::table('pokemon')->get();
+        return view('listPokemon', ['pokemons' => $pokemons]);
     }
 }

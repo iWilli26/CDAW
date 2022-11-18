@@ -16,9 +16,33 @@ class EnergySeeder extends Seeder
     public function run()
     {
         //Etape 1
-        DB::table('energy')->insert([
-             'name' => Str::random(10)
+        $pokemon_types = [
+            'normal',
+            'fighting',
+            'flying',
+            'poison',
+            'ground',
+            'rock',
+            'bug',
+            'ghost',
+            'steel',
+            'fire',
+            'water',
+            'grass',
+            'electric',
+            'psychic',
+            'ice',
+            'dragon',
+            'dark',
+            'fairy',
+        ];
+        //Etape 2
+        foreach ($pokemon_types as $pokemon_type) {
+            DB::table('energy')->insert([
+                'name' => $pokemon_type,
             ]);
+        }
+        
 
         //Etape 2
         //\App\Models\Energy::factory(10)->create();
