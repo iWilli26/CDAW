@@ -27,8 +27,12 @@
 @endsection
 <style scoped>
 .table-wrapper {
-    margin: 2vw 5vw 5vw;
+    margin: 0vw 5vw 5vw;
     box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    text-align: center;
 }
 
 .fl-table {
