@@ -21,5 +21,5 @@ Route::get('/bruh/{name}/{age}', function ($name, $age) {
     return $name . ' a ' . $age . ' ans';
 })->where(['age' => '^[0-9]*$', 'name', '^[a-zA-Z]+$']);
 
-Route::get('/pokemon/{name}', 'App\Http\Controllers\listePokemonsController@getSinglePokemon');
-Route::get('/pokemons', 'App\Http\Controllers\listePokemonsController@getAll');
+Route::get('/pokemon/{name}', 'App\Http\Controllers\PokemonController@getSinglePokemon');
+Route::get('/pokemons', 'App\Http\Controllers\PokemonController@displayAll');

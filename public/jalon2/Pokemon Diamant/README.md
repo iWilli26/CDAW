@@ -1,10 +1,10 @@
 # Auteur(s)
 
--   <NGUYEN William>
+-   NGUYEN William
 
-# Jalon X
+# Jalon 2
 
-<description>
+description
 
 Fonctionnalités implémentées :
 

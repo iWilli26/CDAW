@@ -3,9 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Http;
 
 class Pokemon extends Model
 {
+    public static function getSinglePokemon($name)
+    {
+        $response = Http::get('https://pokeapi.co/api/v2/pokemon/' . $name);
+        return $response->object();
+    }
     /**
      * Get the energy associated with the pokemon.
      */
