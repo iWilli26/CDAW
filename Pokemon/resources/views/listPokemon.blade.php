@@ -8,7 +8,7 @@
         <table class="fl-table">
             <tr>
                 <th>Id</th>
-                <th>Image</th>
+                <th>Sprite</th>
                 <th>Name</th>
                 <th>Énergie</th>
             </tr>
