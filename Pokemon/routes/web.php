@@ -28,4 +28,8 @@ Route::post('/login', 'App\Http\Controllers\LoginController@authenticate');
 Route::get('/logout', 'App\Http\Controllers\LoginController@logout');
 Route::get('/profile', array('as' => 'profile', 'uses' => 'App\Http\Controllers\ProfileController@getProfile'));
 Route::get('/deleteProfile', array('as' => 'deleteProfile', 'uses' => 'App\Http\Controllers\ProfileController@deleteProfile'));
-Route::post('/updateProfile', array('as' => 'updateProfile', 'uses' => 'App\Http\Controllers\ProfileController@updateProfile'));
+Route::get('/register', array('as' => 'register', 'uses' => 'App\Http\Controllers\LoginController@register'));
+Route::get('/registerUser',  function () {
+    return view('register');
+});
+Route::get('/createAccount', array('as' => 'createAccount', 'uses' => 'App\Http\Controllers\ProfileController@createAccount'));

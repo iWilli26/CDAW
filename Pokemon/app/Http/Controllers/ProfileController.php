@@ -18,7 +18,7 @@ class ProfileController extends Controller
         }
         //get user
         $user = Auth::user();
-        return view('profile', ['user' => $user]);
+        return view('registerUser', ['user' => $user]);
     }
     public static function deleteProfile()
     {
@@ -40,5 +40,19 @@ class ProfileController extends Controller
         DB::table('users')->where('id', '=', Auth::user()->id)->update(['name' => $request->name, 'email' => $request->email]);
         // }
         return back()->with('message', 'Profile Updated');
+    }
+    public static function createAccount(Request $request)
+    {
+        $request->validate([
+            'username' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:8',
+        ]);
+        DB::table('users')->insert(['name' => $request->name, 'email' => $request->email, 'password' => bcrypt($request->password)]);
+        return redirect('/login');
+    }
+    public static function register()
+    {
+        return view('register');
     }
 }

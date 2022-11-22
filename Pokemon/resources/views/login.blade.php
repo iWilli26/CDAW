@@ -1,8 +1,8 @@
 @extends('template')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+<div class="container ">
+    <div class="row  justify-content-center">
+        <div class="m-5 col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
                 <div class="card-body">
@@ -38,10 +38,11 @@
                             </div>
                         </div>
                         <!-- submit and authenticate using LoginController-->
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="mt-2 btn btn-primary">
                             {{ __('Login') }}
                         </button>
                     </form>
+                    <a href="/register">Not registered ?</a>
                 </div>
             </div>
         </div>
