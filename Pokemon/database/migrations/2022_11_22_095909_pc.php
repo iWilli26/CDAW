@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('pokemon', function (Blueprint $table) {
-            $table->integer('energy')->change();
+        Schema::create('pc', function (Blueprint $table) {
+            $table->id();
+            $table->integer('user_id');
+            $table->integer('pokemon_id');
+            $table->integer('level');
         });
     }
 
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('pc');
     }
 };

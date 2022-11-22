@@ -1,30 +1,55 @@
 @extends('template')
 @section('content')
-<?php
-?>
-<div>
-    <h1>Liste des pokémons</h1>
-    <div class="table-wrapper">
-        <table class="fl-table">
-            <tr>
-                <th>Id</th>
-                <th>Sprite</th>
-                <th>Name</th>
-                <th>Énergie</th>
-            </tr>
-            @foreach ($pokemons as $pokemon)
-            <tr>
-                <td>{{$pokemon->pokemon_id}}</td>
-                <td><img src=" {{$pokemon->image}}" alt="image du pokemon">
-                </td>
-                <td>{{ucfirst($pokemon->name)}}</td>
-                <td>{{ucfirst(DB::table('energy')->where('energy_id', $pokemon->energy)->first()->name)}}</td>
-            </tr>
-            @endforeach
-        </table>
+
+<head>
+    <title>Liste des pokémons</title>
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css" />
+    <script type="text/javascript" defer charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js">
+    </script>
+    <script defer src="./js/listPokemon.js"></script>
+</head>
+
+<body>
+
+    <div>
+        <h1>Liste des pokémons</h1>
+        <div class="table-wrapper">
+            <table class="fl-table">
+                <thead>
+
+                    <tr>
+                        <th>Id</th>
+                        <th>Sprite</th>
+                        <th>Name</th>
+                        <th>Énergie</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    @foreach ($pokemons as $pokemon)
+                    <tr>
+                        <td>{{$pokemon->id}}</td>
+                        <td><img src=" {{$pokemon->front}}" alt="image du pokemon">
+                        </td>
+                        <td>{{ucfirst($pokemon->name)}}</td>
+                        <td>{{ucfirst(DB::table('energy')->where('id', $pokemon->energy)->first()->name)}}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
-@endsection
+    @endsection
+</body>
+
+
 <style scoped>
 .table-wrapper {
     margin: 0vw 5vw 5vw;

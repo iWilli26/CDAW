@@ -17,11 +17,15 @@ return new class extends Migration
     {
         Schema::create('pokemon', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('image');
-            $table->integer('level');
+            $table->string('name')->nullable();
+            $table->string('back');
+            $table->string('front');
             $table->bigInteger('pv_max');
             $table->timestamps();
+            $table->integer('energy');
+            $table->bigInteger('normal_attack');
+            $table->bigInteger('special_attack');
+            $table->bigInteger('special_defense');
         });
     }
 
