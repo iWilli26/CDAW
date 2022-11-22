@@ -7,15 +7,12 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Bruh</title>
-    <!-- Favicon-->
+
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <!-- Font Awesome icons (free version)-->
-    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-    <!-- Google fonts-->
+    <script defer src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
         type="text/css" />
-    <!-- Core theme CSS (includes Bootstrap)-->
     <link rel="stylesheet" href="{{ URL::asset('css/styles.css') }}" />
 
 </head>
@@ -24,7 +21,7 @@
     <!-- Navigation-->
     <nav class=" navbar navbar-expand-lg bg-secondary text-uppercase sticky-top " id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="#page-top">Start Bootstrap</a>
+            <a class="navbar-brand" href="/">Pokemon</a>
             <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button"
                 data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -34,13 +31,19 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">Portfolio</a>
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="/">Pokedex</a>
                     </li>
                     <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">About</a>
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">Battle</a>
                     </li>
+                    @if (Auth::check())
                     <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">Créer un Compte</a>
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="/logout">Logout</a>
+                    </li>
+                    @endif
+
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="/profile">Profile</a>
                     </li>
                 </ul>
             </div>

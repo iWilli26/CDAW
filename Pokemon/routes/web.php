@@ -21,5 +21,11 @@ Route::get('/bruh/{name}/{age}', function ($name, $age) {
     return $name . ' a ' . $age . ' ans';
 })->where(['age' => '^[0-9]*$', 'name', '^[a-zA-Z]+$']);
 
-Route::get('/', 'App\Http\Controllers\PokemonController@displayAll');
+Route::get('/', array('as' => 'pokedex', 'uses' => 'App\Http\Controllers\PokemonController@displayAll'));
 Route::get('/test', 'App\Http\Controllers\PokemonController@getPokedex');
+Route::get('/login', array('as' => 'login', 'uses' => 'App\Http\Controllers\LoginController@login'));
+Route::post('/login', 'App\Http\Controllers\LoginController@authenticate');
+Route::get('/logout', 'App\Http\Controllers\LoginController@logout');
+Route::get('/profile', array('as' => 'profile', 'uses' => 'App\Http\Controllers\ProfileController@getProfile'));
+Route::get('/deleteProfile', array('as' => 'deleteProfile', 'uses' => 'App\Http\Controllers\ProfileController@deleteProfile'));
+Route::post('/updateProfile', array('as' => 'updateProfile', 'uses' => 'App\Http\Controllers\ProfileController@updateProfile'));

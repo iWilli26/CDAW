@@ -1,53 +1,53 @@
 @extends('template')
-@section('content')
 
 <head>
-    <title>Liste des pokémons</title>
-    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css" />
-    <script type="text/javascript" defer charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js">
     </script>
-    <script defer src="./js/listPokemon.js"></script>
 </head>
+@section('content')
+<div>
+    <h1>Liste des pokémons</h1>
+    <div class="table-wrapper">
+        <table class="fl-table">
+            <thead>
 
-<body>
+                <tr>
+                    <th>Id</th>
+                    <th>Sprite</th>
+                    <th>Name</th>
+                    <th>Énergie</th>
+                </tr>
+            </thead>
+            <tbody>
 
-    <div>
-        <h1>Liste des pokémons</h1>
-        <div class="table-wrapper">
-            <table class="fl-table">
-                <thead>
-
-                    <tr>
-                        <th>Id</th>
-                        <th>Sprite</th>
-                        <th>Name</th>
-                        <th>Énergie</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    @foreach ($pokemons as $pokemon)
-                    <tr>
-                        <td>{{$pokemon->id}}</td>
-                        <td><img src=" {{$pokemon->front}}" alt="image du pokemon">
-                        </td>
-                        <td>{{ucfirst($pokemon->name)}}</td>
-                        <td>{{ucfirst(DB::table('energy')->where('id', $pokemon->energy)->first()->name)}}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                @foreach ($pokemons as $pokemon)
+                <tr>
+                    <td>{{$pokemon->id}}</td>
+                    <td><img src=" {{$pokemon->front}}" alt="image du pokemon">
+                    </td>
+                    <td>{{ucfirst($pokemon->name)}}</td>
+                    <td>{{ucfirst(DB::table('energy')->where('id', $pokemon->energy)->first()->name)}}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
-    @endsection
-</body>
+</div>
+@endsection
+<script>
+//datatable
+$(document).ready(function() {
+    $('.fl-table').DataTable();
+});
+</script>
 
 
 <style scoped>
