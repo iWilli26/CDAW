@@ -17,12 +17,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/bruh/{name}/{age}', function ($name, $age) {
-    return $name . ' a ' . $age . ' ans';
-})->where(['age' => '^[0-9]*$', 'name', '^[a-zA-Z]+$']);
-
 Route::get('/', array('as' => 'pokedex', 'uses' => 'App\Http\Controllers\PokemonController@displayAll'));
-Route::get('/test', 'App\Http\Controllers\PokemonController@getPokedex');
 Route::get('/login', array('as' => 'login', 'uses' => 'App\Http\Controllers\LoginController@login'));
 Route::post('/login', 'App\Http\Controllers\LoginController@authenticate');
 Route::get('/logout', 'App\Http\Controllers\LoginController@logout');
@@ -32,4 +27,6 @@ Route::get('/register', array('as' => 'register', 'uses' => 'App\Http\Controller
 Route::get('/registerUser',  function () {
     return view('register');
 });
+//route to get a pokemon
+Route::get('/pokemon/{id}', array('as' => 'pokemon', 'uses' => 'App\Http\Controllers\PokemonController@getPokemon'));
 Route::get('/createAccount', array('as' => 'createAccount', 'uses' => 'App\Http\Controllers\ProfileController@createAccount'));
