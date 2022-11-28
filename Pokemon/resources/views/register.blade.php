@@ -1,32 +1,65 @@
 @extends('template')
 @section('content')
-<!-- Register account form -->
-<div class="card">
-    <div class="card-header">
-        <h2>Register</h2>
-    </div>
-    <div class="card-body">
-        <form method="post" action="/register">
-            {{@csrf_field()}}
-            <div class="row">
-                <div class="col-sm-4">
-                    <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
-                        class="img-fluid" alt="image de profil">
+<div class="container ">
+    <div class="row  justify-content-center">
+        <div class="m-5 col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-body">
+                    <form method="POST" action="{{ route('createAccount') }}">
+                        @csrf
+
+                        <div class="form-group">
+                            <label for="email"
+                                class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                    name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <label for="username"
+                                class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="username" type="username"
+                                    class="form-control @error('username') is-invalid @enderror" name="username"
+                                    value="{{ old('username') }}" required autocomplete="username" autofocus>
+
+                                @error('username')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <label for="password"
+                                class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <div class="col-md-6">
+                                <input id="password" type="password"
+                                    class="form-control @error('password') is-invalid @enderror" name="password"
+                                    value="{{ old('password') }}" required autocomplete="password" autofocus>
+
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <!-- submit and authenticate using LoginController-->
+                        <button type="submit" class="mt-2 btn btn-primary">
+                            {{ __('Register') }}
+                        </button>
+                    </form>
                 </div>
-                <div class="col-sm-8">
-                    <div><strong>Pseudo :</strong>
-                        <input type="text" class="form-control" name="username">
-                    </div>
-                    <div><strong>Email :</strong>
-                        <input type="text" class="form-control" name="email">
-                    </div>
-                    <div><strong>Mot de passe :</strong>
-                        <input type="text" class="form-control" name="password">
-                    </div>
-                </div>
-                <a style="width:40vw" type="submit" href="/register" class="btn btn-primary mt-2">Register</a>
             </div>
-        </form>
+        </div>
     </div>
 </div>
+
 @endsection

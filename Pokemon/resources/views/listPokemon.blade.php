@@ -5,8 +5,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js">
     </script>
-    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' type='text/javascript'></script>
-    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+
 
 </head>
 @section('content')
@@ -24,8 +23,6 @@
                 </tr>
             </thead>
             <tbody>
-                <button type="button" data-toggle="modal" data-target="#infos"
-                    class="btn btn-primary">Informations</button>
                 <div class="modal" id="infos" style="display: none;">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -34,14 +31,13 @@
                             </div>
                             <div class="modal-body">
                                 <div style="display: flex;flex-direction:row">
-                                    <div class="images" style="display: flex;flex-direction:column"></div>
-                                    <div class="infos" style="display: flex;flex-direction:column;margin:10px"></div>
+                                    <div class="images"></div>
+                                    <div class="infos"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <tr>
                     <td></td>
                     <td></td>
@@ -75,19 +71,11 @@ $(document).ready(function() {
         }
     }
     $('.fl-table').on("click", (event) => {
-        let id = "";
-        let energy = "";
-        if (event.target.tagName === "IMG") {
-            id = event.target.parentNode.parentNode.children[0].innerHTML;
-            energy = event.target.parentNode.parentNode.children[3].innerHTML;
-        } else {
-            id = event.target.parentNode.children[0].innerHTML;
-            energy = event.target.parentNode.children[3].innerHTML;
-        }
-        $.ajax({
-            url: '/pokemon/' + id,
-            type: 'GET',
-            success: function(data) {
+        let id = $(event.target).closest("tr")[0].children[0].innerHTML;
+        let energy = $(event.target).closest("tr")[0].children[3].innerHTML;
+        fetch('/pokemon/' + id)
+            .then(response => response.json())
+            .then(data => {
                 document.getElementsByClassName("modal-title")[0].innerHTML =
                     capitalizeFirstLetter(data
                         .name);
@@ -101,10 +89,7 @@ $(document).ready(function() {
                     "<p>Energy : " + energy + "</p>";
 
                 modal.style.display = 'block';
-
-            }
-
-        });
+            })
 
 
     });
@@ -113,14 +98,23 @@ $(document).ready(function() {
 
 
 <style scoped>
-.infos p {
-    font-size: 1.5rem;
+.infos {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .images img {
     width: 100px;
     height: 100px;
     margin: 10px;
+}
+
+.images {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .pokemon {

@@ -13,10 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/', array('as' => 'pokedex', 'uses' => 'App\Http\Controllers\PokemonController@displayAll'));
 Route::get('/login', array('as' => 'login', 'uses' => 'App\Http\Controllers\LoginController@login'));
 Route::post('/login', 'App\Http\Controllers\LoginController@authenticate');
@@ -24,9 +20,9 @@ Route::get('/logout', 'App\Http\Controllers\LoginController@logout');
 Route::get('/profile', array('as' => 'profile', 'uses' => 'App\Http\Controllers\ProfileController@getProfile'));
 Route::get('/deleteProfile', array('as' => 'deleteProfile', 'uses' => 'App\Http\Controllers\ProfileController@deleteProfile'));
 Route::get('/register', array('as' => 'register', 'uses' => 'App\Http\Controllers\LoginController@register'));
-Route::get('/registerUser',  function () {
-    return view('register');
-});
-//route to get a pokemon
+
+Route::post('/editAccount', array('as' => 'editAccount', 'uses' => 'App\Http\Controllers\ProfileController@editAccount'));
+Route::post('/createAccount', array('as' => 'createAccount', 'uses' => 'App\Http\Controllers\ProfileController@createAccount'));
+
+
 Route::get('/pokemon/{id}', array('as' => 'pokemon', 'uses' => 'App\Http\Controllers\PokemonController@getPokemon'));
-Route::get('/createAccount', array('as' => 'createAccount', 'uses' => 'App\Http\Controllers\ProfileController@createAccount'));

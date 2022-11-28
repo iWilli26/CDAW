@@ -1,32 +1,48 @@
 @extends('template')
 @section('content')
-<!-- display Profile with update and delete user -->
+
 <div class="card">
     <div class="card-header">
         <h2>Profile</h2>
     </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-sm-4">
-                <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" class="img-fluid"
-                    alt="image de profil">
+            @if (session('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
             </div>
-            <form method="post" action="/updateProfile">
-                {{@csrf_field()}}
-                <div class="col-sm-8">
+            @endif
 
-                    <div><strong>Pseudo :</strong>
+            <form method="post" action="{{ route('editAccount') }}">
+                @csrf
+                <div class="col-sm-8">
+                    <div>
+                        <label for="username">{{ __('Pseudo') }}</label>
                         <input type="text" class="form-control" name="username" value="{{$user->username}}">
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
-                    <div><strong>Email :</strong>
+                    <div>
+                        <label for="email">{{ __('E-Mail Address') }}</label>
                         <input type="text" class="form-control" name="email" value="{{$user->email}}">
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
-                    <div><strong>Mot de passe :</strong>
+                    <div>
+                        <label for="password">{{ __('Password') }}</label>
                         <input type="text" class="form-control" name="password">
                     </div>
                     <div><strong>Niveau : </strong> {{$user->level}}</div>
                 </div>
-                <a style="width:40vw" type="submit" href="/updateProfile" class="btn btn-primary mt-2">Modifier</a>
+                <button type="submit" class="mt-2 btn btn-primary">
+                    {{ __('Edit') }}
+                </button>
             </form>
             <a style="width:40vw" type="submit" class="btn btn-danger mt-2">Supprimer</a>
         </div>
