@@ -10,7 +10,10 @@ use App\Models\User;
 class ProfileController extends Controller
 {
 
-
+    public static function getMe()
+    {
+        return Auth::user();
+    }
     public static function getProfile()
     {
         // if not connected, redirect to login
@@ -19,7 +22,7 @@ class ProfileController extends Controller
         }
         //get user
         $user = Auth::user();
-        return view('profile', ['user' => $user]);
+        return view('profile');
     }
     public static function deleteProfile()
     {
@@ -70,7 +73,6 @@ class ProfileController extends Controller
         if (Auth::attempt($credentials)) {
             return redirect()->intended('/');
         }
-        
     }
     public static function register()
     {

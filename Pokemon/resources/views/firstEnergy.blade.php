@@ -1,8 +1,8 @@
 @extends('template')
 @push('head')
 <script src="{{ asset('/js/firstEnergy.js') }}"></script>
-<!-- include css -->
 <link rel="stylesheet" href="{{ asset('/css/firstEnergy.css')}}">
+<meta name="_token" content="{{ csrf_token() }}">
 @endpush
 @section('content')
 <div class="header">
@@ -26,6 +26,11 @@
     </div>
 </div>
 <?php
+
+use App\Models\Energy;
+use Illuminate\Support\Facades\Auth;
+
+$userId = Auth::id();
 //get all energies
 $pokemons = (object)[
     'fire' => [

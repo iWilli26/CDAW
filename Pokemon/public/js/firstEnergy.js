@@ -14,6 +14,7 @@ $(document).ready(function () {
         electric: ["Pichu", "Pachirisu", "Shinx"],
         normal: ["Starly", "Bidoof", "Aipom"],
         rock: ["Geodude"],
+        fighting: ["Machop", "Riolu"],
     };
     let modal = document.getElementById("infos");
     window.onclick = function (event) {
@@ -44,6 +45,35 @@ $(document).ready(function () {
                         "</div>";
                     document.querySelector(".infos").innerHTML = html;
                 }
+                $(".poke").click(function () {
+                    let pokemonId = "";
+                    for (let i = 0; i < pokemon.length; i++) {
+                        if (
+                            $(this).text().toLowerCase() ==
+                            pokemon[i].name.toLowerCase()
+                        ) {
+                            pokemonId = pokemon[i].id;
+                        }
+                    }
+                    fetch("/me/").then((response) => {
+                        response.json().then((data) => {
+                            fetch(`/addPokemon`, {
+                                method: "POST",
+                                headers: {
+                                    "X-CSRF-Token": $(
+                                        'meta[name="_token"]'
+                                    ).attr("content"),
+                                },
+                                body: JSON.stringify({
+                                    pokemonId: pokemonId,
+                                    userId: data.id,
+                                }),
+                            }).then((response) => {
+                                window.location.href = "/profile";
+                            });
+                        });
+                    });
+                });
             });
         }
     });

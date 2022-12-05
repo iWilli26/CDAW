@@ -1,6 +1,11 @@
 @extends('template')
 @section('content')
+<?php
 
+use Illuminate\Support\Facades\Auth;
+
+$user = Auth::user();
+?>
 <div class="card">
     <div class="card-header">
         <h2>Profile</h2>
@@ -46,6 +51,23 @@
             </form>
             <a style="width:40vw" type="submit" class="btn btn-danger mt-2">Supprimer</a>
         </div>
+    </div>
+    <div class="myPokemon">
+        <?php
+
+        use Illuminate\Support\Facades\DB;
+
+        $pokemons = DB::table('PC')->where('user_id', '=', $user->id)->get();
+        foreach ($pokemons as $pokemon) {
+            $pokemonData = DB::table('pokemon')->where('id', '=', $pokemon->pokemon_id)->first();
+            var_dump($pokemon);
+            echo '<div class="pokemon">';
+            echo '<img src="' . $pokemonData->front . '" alt="pokemon">';
+            echo '<div class="name">' . $pokemonData->name . '</div>';
+            echo '<div class="level">' . $pokemon->level . '</div>';
+            echo '</div>';
+        }
+        ?>
     </div>
 </div>
 @endsection

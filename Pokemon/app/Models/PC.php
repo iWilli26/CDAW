@@ -4,10 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class PC extends Model
 {
     use HasFactory;
+    public static function addPokemon(Request $request)
+    {
+        /** 
+         * @param  \Illuminate\Http\Request  $request
+         * @param  string  $pokemon
+         * @param  string  $user
+         * @return \Illuminate\Http\Response*/
+        $pokemon = Pokemon::getPokemonById($request->pokemon);
+        $user = User::getUserById($request->user);
+        $pc = new PC();
+        $pc->pokemon_id = $pokemon->pokemon_id;
+        $pc->user_id = $user->user_id;
+        $pc->save();
+    }
     /**
      * The table associated with the model.
      *

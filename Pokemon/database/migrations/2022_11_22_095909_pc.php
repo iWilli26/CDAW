@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('energy_id');
-            $table->foreign('energy_id')->references('id')->on('energy');
+            $table->unsignedBigInteger('pokemon_id');
+            $table->foreign('pokemon_id')->references('id')->on('pokemon');
             $table->integer('level');
         });
     }

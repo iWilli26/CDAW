@@ -6,10 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class Pokemon extends Model
 {
-    public static function getPokemonById(Request $request, $id)
+    public static function addPokemon(Request $request)
+    {
+        $content = json_decode($request->getContent());
+        DB::table('pc')->insert([
+            'user_id' => $content->userId,
+            'pokemon_id' => $content->pokemonId,
+            'level' => 1,
+        ]);
+        return "success";
+    }
+    public static function getPokemonById($id)
     {
         /** 
          * @param  \Illuminate\Http\Request  $request
@@ -17,7 +29,7 @@ class Pokemon extends Model
          * @return \Illuminate\Http\Response*/
         return (DB::table('pokemon')->where('id', $id)->first());
     }
-    public static function getPokemonByName(Request $request, $name)
+    public static function getPokemonByName($name)
     {
         //use models to get the pokemon with the name
         /** 

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -30,6 +31,19 @@ class User extends Authenticatable
         return $this->belongsToMany(Energy::class, 'mastered', 'user_id', 'energy_id');
     }
 
+    public function pokemons()
+    {
+        return $this->belongsToMany(Pokemon::class, 'PC', 'user_id', 'pokemon_id');
+    }
+
+    public static function getUserById($id)
+    {
+        /** 
+         * @param  \Illuminate\Http\Request  $request
+         * @param  string  $id
+         * @return \Illuminate\Http\Response*/
+        return (DB::table('users')->where('id', $id)->first());
+    }
 
     /**
      * The attributes that should be hidden for serialization.

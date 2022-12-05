@@ -8,10 +8,14 @@
 .poke {
     display: flex;
     width: 30vw;
+    cursor: pointer;
     margin-bottom: 10px;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     border: 1px solid grey;
     border-radius: 10px;
+}
+.poke:hover {
+    background-color: #69dcc1;
 }
