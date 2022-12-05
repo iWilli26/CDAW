@@ -15,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('pc', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('pokemon_id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('energy_id');
+            $table->foreign('energy_id')->references('id')->on('energy');
             $table->integer('level');
         });
     }

@@ -7,14 +7,17 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Bruh</title>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js">
+    </script>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <script defer src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
         type="text/css" />
     <link rel="stylesheet" href="{{ URL::asset('css/styles.css') }}" />
-
+    @stack('head')
 </head>
 
 <body id="page-top">
@@ -57,11 +60,11 @@
             <div class="row">
                 <!-- Footer Location-->
                 <div class="col-lg-4 mb-5 mb-lg-0">
-                    <h4 class="text-uppercase mb-4">Location</h4>
+                    <h4 class="text-uppercase mb-4">Bite</h4>
                     <p class="lead mb-0">
-                        2215 John Daniel Drive
+                        Rouni est cringe
                         <br />
-                        Clark, MO 65243
+
                     </p>
                 </div>
                 <!-- Footer Social Icons-->

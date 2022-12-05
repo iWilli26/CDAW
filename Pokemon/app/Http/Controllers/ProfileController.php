@@ -65,7 +65,12 @@ class ProfileController extends Controller
             'password' => 'required|min:8',
         ]);
         DB::table('users')->insert(['username' => $request->username, 'email' => $request->email, 'password' => bcrypt($request->password), 'level' => 1, 'is_admin' => false]);
-        return redirect('/login');
+        //Login
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended('/');
+        }
+        
     }
     public static function register()
     {

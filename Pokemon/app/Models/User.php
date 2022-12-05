@@ -25,6 +25,12 @@ class User extends Authenticatable
         'is_admin',
     ];
 
+    public function energies()
+    {
+        return $this->belongsToMany(Energy::class, 'mastered', 'user_id', 'energy_id');
+    }
+
+
     /**
      * The attributes that should be hidden for serialization.
      *

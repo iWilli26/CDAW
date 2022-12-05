@@ -22,8 +22,10 @@ return new class extends Migration
             $table->string('front');
             $table->bigInteger('pv_max');
             $table->timestamps();
-            $table->integer('energy');
-            $table->bigInteger('normal_attack');
+            $table->unsignedBigInteger('energy_id');
+            $table->foreign('energy_id')->references('id')->on('energy');
+            $table->bigInteger('attack');
+            $table->bigInteger('defense');
             $table->bigInteger('special_attack');
             $table->bigInteger('special_defense');
         });
@@ -37,5 +39,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('pokemon');
+        Schema::dropIfExists('pc');
     }
 };

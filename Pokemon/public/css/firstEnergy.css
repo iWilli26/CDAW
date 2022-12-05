@@ -1,0 +1,17 @@
+.infos {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center;
+    align-items: center; */
+}
+
+.poke {
+    display: flex;
+    width: 30vw;
+    margin-bottom: 10px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid grey;
+    border-radius: 10px;
+}

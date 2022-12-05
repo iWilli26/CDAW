@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Energy extends Model
+class PC extends Model
 {
     use HasFactory;
     /**
@@ -13,7 +13,7 @@ class Energy extends Model
      *
      * @var string
      */
-    protected $table = 'energy';
+    protected $table = 'PC';
     /**
      * The database connection that should be used by the model.
      *
@@ -25,13 +25,17 @@ class Energy extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'energy_id';
+    protected $primaryKey = 'entity_id';
     /**
      * The user who mastered this energy.
      */
-    public function users()
+    public function user()
     {
-        return $this->belongsToMany(Role::class, 'mastered', 'energy_id', 'user_id');
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
+    }
+    public function pokemon()
+    {
+        return $this->belongsTo(Pokemon::class, 'pokemon_id', 'pokemon_id');
     }
     /**
      * The attributes that are mass assignable.
@@ -39,6 +43,7 @@ class Energy extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'level',
+        'team',
     ];
 }

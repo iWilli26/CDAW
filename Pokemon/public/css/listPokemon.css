@@ -1,0 +1,73 @@
+.infos {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.images img {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+}
+
+.images {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.pokemon {
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+/* get bigger on hover */
+.pokemon:hover {
+    transform: scale(1.1);
+}
+
+.table-wrapper {
+    margin: 0vw 5vw 5vw;
+    box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    text-align: center;
+}
+
+.fl-table {
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: normal;
+    border: none;
+    border-collapse: collapse;
+    width: 90vw;
+    white-space: nowrap;
+    background-color: white;
+}
+
+.fl-table td,
+.fl-table th {
+    text-align: center;
+    padding: 8px;
+}
+
+.fl-table td {
+    border-right: 1px solid #f8f8f8;
+    font-size: 12px;
+}
+
+.fl-table thead th {
+    color: #ffffff;
+    background: #4fc3a1;
+}
+
+.fl-table thead th:nth-child(odd) {
+    color: #ffffff;
+    background: #324960;
+}
+
+.fl-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
