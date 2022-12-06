@@ -27,6 +27,8 @@ class ProfileController extends Controller
     public static function deleteProfile()
     {
         DB::table('users')->where('id', '=', Auth::user()->id)->delete();
+        //delete user
+        User::where('id', Auth::user()->id)->delete();
         return redirect('/login');
     }
     public static function editAccount(Request $request)

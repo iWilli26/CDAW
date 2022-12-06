@@ -30,7 +30,12 @@ Route::get('/firstEnergy/', array('as' => 'firstEnergy', 'uses' => 'App\Http\Con
 Route::get('/pokemonId/{id}', array('as' => 'pokemon', 'uses' => 'App\Models\Pokemon@getPokemonById'));
 Route::get('/pokemonName/{name}', array('as' => 'pokemon', 'uses' => 'App\Models\Pokemon@getPokemonByName'));
 
-//create a route to add a pokemon in the pc of the user
 Route::post('/addPokemon', array('as' => 'addPokemon', 'uses' => 'App\Models\Pokemon@addPokemon'));
 
+Route::post('/addEnergy', array('as' => 'addEnergy', 'uses' => 'App\Models\Energy@addEnergy'));
+
 Route::get('/me', array('as' => 'me', 'uses' => 'App\Http\Controllers\ProfileController@getMe'));
+
+Route::get('/battleMenu', array('as' => 'battleMenu', 'uses' => 'App\Http\Controllers\BattleController@battleMenu'));
+
+Route::get('/energyName/{name}', array('as' => 'energy', 'uses' => 'App\Models\Energy@getEnergyByName'));

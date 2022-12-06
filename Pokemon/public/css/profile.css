@@ -1,0 +1,14 @@
+.myPokemons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.pokemon {
+    border: 1px solid grey;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    width: 30vw;
+    margin: 5px;
+}

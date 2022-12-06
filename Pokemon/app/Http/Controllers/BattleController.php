@@ -10,16 +10,18 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class EnergyController extends Controller
+class BattleController extends Controller
 {
-    public static function getFirstEnergy()
+    public static function battleMenu()
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
         $user = Auth::user();
         $count = DB::table('pc')->where('user_id', '=', $user->id)->count();
         if ($count == 0) {
-            return view('firstEnergy');
-        } else {
-            return redirect('/battleMenu');
+            return redirect('/firstEnergy');
         }
+        return view('battleMenu');
     }
 }

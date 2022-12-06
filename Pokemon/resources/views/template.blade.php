@@ -37,7 +37,7 @@
                         <a class="nav-link py-3 px-0 px-lg-3 rounded" href="/">Pokedex</a>
                     </li>
                     <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">Battle</a>
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="/battleMenu">Battle</a>
                     </li>
                     @if (Auth::check())
                     <li class="nav-item mx-0 mx-lg-1">

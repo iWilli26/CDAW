@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pc', function (Blueprint $table) {
-            $table->id();
+        Schema::create('mastered', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('pokemon_id');
-            $table->foreign('pokemon_id')->references('id')->on('pokemon');
-            $table->integer('level');
-            $table->boolean('team');
+            $table->unsignedBigInteger('energy_id');
+            $table->foreign('energy_id')->references('id')->on('energy');
         });
     }
 
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pc');
+        Schema::dropIfExists('mastered');
     }
 };
