@@ -33,7 +33,7 @@ class User extends Authenticatable
 
     public function pokemons()
     {
-        return $this->belongsToMany(Pokemon::class, 'PC', 'user_id', 'pokemon_id');
+        return $this->belongsToMany(Pokemon::class, 'pc', 'user_id', 'pokemon_id');
     }
 
     public static function getUserById($id)

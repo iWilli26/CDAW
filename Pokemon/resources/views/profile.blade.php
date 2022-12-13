@@ -1,6 +1,6 @@
 @extends('template')
 @push('head')
-<!-- <script src="{{ asset('/js/listPokemon.js') }}"></script> -->
+<script src="{{ asset('/js/profile.js') }}"></script>
 <link rel="stylesheet" href="{{ asset('/css/profile.css')}}">
 @endpush
 @section('content')
@@ -58,22 +58,21 @@ $user = Auth::user();
     </div>
     <div class="myPokemons">
         <?php
+        for ($i = 0; $i < count($pokemonPC); $i++) {
 
-        use Illuminate\Support\Facades\DB;
-
-        $pokemons = DB::table('PC')->where('user_id', '=', $user->id)->get();
-        foreach ($pokemons as $pokemon) {
-            $pokemonData = DB::table('pokemon')->where('id', '=', $pokemon->pokemon_id)->first();
             echo '<div class="pokemon">';
-            echo '<img src="' . $pokemonData->front . '" alt="pokemon">';
+            echo '<img src="' . $pokemonData[$i]->front . '" alt="pokemon">';
             echo '<div class="infos">';
-            echo '<div class="name">' . ucfirst($pokemonData->name) . '</div>';
-            echo '<div class="level">Niveau : ' . $pokemon->level . '</div>';
+            echo '<div class="name">' . ucfirst($pokemonData[$i]->name) . '</div>';
+            echo '<div class="level">Niveau : ' . $pokemonPC[$i]->level . '</div>';
             echo '<div class="form-check">
+            <div>
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
-              Team
+            Team
             </label>
+            </div>
+            <button class="btn btn-danger btn-sm rounded-5 release" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
           </div>';
             echo '</div>';
             echo '</div>';

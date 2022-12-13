@@ -28,7 +28,7 @@ class PC extends Model
      *
      * @var string
      */
-    protected $table = 'PC';
+    protected $table = 'pc';
     /**
      * The database connection that should be used by the model.
      *

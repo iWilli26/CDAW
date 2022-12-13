@@ -12,3 +12,14 @@
     width: 30vw;
     margin: 5px;
 }
+.form-check {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.form-check button {
+    margin: 5px;
+}
+.infos {
+    width: 100%;
+}

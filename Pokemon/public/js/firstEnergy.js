@@ -53,49 +53,44 @@ $(document).ready(function () {
                             pokemon[i].name.toLowerCase()
                         ) {
                             pokemonId = pokemon[i].id;
+                            console.log(userId, pokemonId);
                         }
                     }
-                    //get id of energy
-
-                    fetch("/me/").then((response) => {
-                        response.json().then((data) => {
-                            let userId = data.id;
-                            fetch("energyName/" + energy.toLowerCase()).then(
-                                (response) => {
-                                    response.json().then((data) => {
-                                        let energyId = data.id;
-                                        fetch(`/addEnergy`, {
-                                            method: "POST",
-                                            headers: {
-                                                "X-CSRF-Token": $(
-                                                    'meta[name="_token"]'
-                                                ).attr("content"),
-                                            },
-                                            body: JSON.stringify({
-                                                energyId: energyId,
-                                                userId: userId,
-                                            }),
-                                        }).then((response) => {
-                                            fetch(`/addPokemon`, {
-                                                method: "POST",
-                                                headers: {
-                                                    "X-CSRF-Token": $(
-                                                        'meta[name="_token"]'
-                                                    ).attr("content"),
-                                                },
-                                                body: JSON.stringify({
-                                                    pokemonId: pokemonId,
-                                                    userId: userId,
-                                                }),
-                                            }).then((response) => {
-                                                // window.location.href = "/profile";
-                                            });
-                                        });
+                    fetch("energyName/" + energy.toLowerCase()).then(
+                        (response) => {
+                            response.json().then((data) => {
+                                let energyId = data.id;
+                                console.log(userId, energyId);
+                                fetch(`/addEnergy`, {
+                                    method: "POST",
+                                    headers: {
+                                        "X-CSRF-Token": $(
+                                            'meta[name="_token"]'
+                                        ).attr("content"),
+                                    },
+                                    body: JSON.stringify({
+                                        energyId: energyId,
+                                        userId: userId,
+                                    }),
+                                }).then((response) => {
+                                    fetch(`/addPokemon`, {
+                                        method: "POST",
+                                        headers: {
+                                            "X-CSRF-Token": $(
+                                                'meta[name="_token"]'
+                                            ).attr("content"),
+                                        },
+                                        body: JSON.stringify({
+                                            pokemonId: pokemonId,
+                                            userId: userId,
+                                        }),
+                                    }).then((response) => {
+                                        window.location.href = "/profile";
                                     });
-                                }
-                            );
-                        });
-                    });
+                                });
+                            });
+                        }
+                    );
                 });
             });
         }

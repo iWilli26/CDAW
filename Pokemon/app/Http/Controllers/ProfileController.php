@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PC;
+use App\Models\Pokemon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -22,12 +24,16 @@ class ProfileController extends Controller
         }
         //get user
         $user = Auth::user();
-        return view('profile');
+        $pokemonsId = PC::where('user_id', '=', $user->id)->get();
+        $pokemonData = [];
+        for ($i = 0; $i < count($pokemonsId); $i++) {
+            $pokemonData[$i] = Pokemon::where('id', '=', $pokemonsId[$i]->pokemon_id)->first();
+        }
+        return view('profile', ['user' => $user, 'pokemonPC' => $pokemonsId, 'pokemonData' => $pokemonData]);
     }
     public static function deleteProfile()
     {
-        DB::table('users')->where('id', '=', Auth::user()->id)->delete();
-        //delete user
+
         User::where('id', Auth::user()->id)->delete();
         return redirect('/login');
     }
@@ -38,13 +44,13 @@ class ProfileController extends Controller
             'email' => 'required|email',
         ]);
         //check if email and username already exists
-        $user = DB::table('users')->where('email', '=', $request->email)->first();
+        $user = User::where('email', $request->email)->first();
         if ($user != null && $user->id != Auth::user()->id) {
             return back()->withErrors([
                 'email' => 'The provided email is already used.',
             ])->onlyInput('email');
         }
-        $user = DB::table('users')->where('username', '=', $request->username)->first();
+        $user = User::where('username', $request->username)->first();
         if ($user != null && $user->id != Auth::user()->id) {
             return back()->withErrors([
                 'username' => 'The provided username is already used.',
@@ -54,10 +60,10 @@ class ProfileController extends Controller
             $request->validate([
                 'password' => 'required|min:8',
             ]);
-            DB::table('users')->where('id', '=', Auth::user()->id)->update(['username' => $request->username, 'email' => $request->email, 'password' => bcrypt($request->input('password'))]);
+            User::where('id', Auth::user()->id)->update(['username' => $request->username, 'email' => $request->email, 'password' => bcrypt($request->password)]);
             return back()->with('message', 'Profile Updated');
         } else {
-            DB::table('users')->where('id', '=', Auth::user()->id)->update(['username' => $request->username, 'email' => $request->email]);
+            User::where('id', Auth::user()->id)->update(['username' => $request->username, 'email' => $request->email]);
             // }
             return back()->with('message', 'Profile Updated');
         }
@@ -69,7 +75,13 @@ class ProfileController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:8',
         ]);
-        DB::table('users')->insert(['username' => $request->username, 'email' => $request->email, 'password' => bcrypt($request->password), 'level' => 1, 'is_admin' => false]);
+        User::create([
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'level' => 1,
+            'is_admin' => false,
+        ]);
         //Login
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {

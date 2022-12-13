@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class Energy extends Model
+class Mastered extends Model
 {
     public static function addEnergy(Request $request)
     {
@@ -34,7 +34,7 @@ class Energy extends Model
 
     public static function checkEnergy($userId, $energyId)
     {
-        $count = Mastered::where('user_id', $userId)->where('energy_id', $energyId)->count();
+        $count = DB::table('mastered')->where('user_id', '=', $userId)->where('energy_id', '=', $energyId)->count();
         if ($count == 0) {
             return false;
         }
@@ -47,32 +47,11 @@ class Energy extends Model
      *
      * @var string
      */
-    protected $table = 'energy';
+    protected $table = 'mastered';
     /**
      * The database connection that should be used by the model.
      *
      * @var string
      */
     protected $connection = 'mysql';
-    /**
-     * The primary key associated with the table.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'energy_id';
-    /**
-     * The user who mastered this energy.
-     */
-    public function users()
-    {
-        return $this->belongsToMany(Role::class, 'mastered', 'energy_id', 'user_id');
-    }
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-    ];
 }

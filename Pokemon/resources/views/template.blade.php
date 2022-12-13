@@ -60,31 +60,28 @@
             <div class="row">
                 <!-- Footer Location-->
                 <div class="col-lg-4 mb-5 mb-lg-0">
-                    <h4 class="text-uppercase mb-4">Bite</h4>
+                    <h4 class="text-uppercase mb-4">Bruh</h4>
                     <p class="lead mb-0">
-                        Rouni est cringe
+                        Pachirisu >>>>>> Pikachu
                         <br />
 
                     </p>
                 </div>
                 <!-- Footer Social Icons-->
                 <div class="col-lg-4 mb-5 mb-lg-0">
-                    <h4 class="text-uppercase mb-4">Around the Web</h4>
-                    <a class="btn btn-outline-light btn-social mx-1" href="#!"><i
-                            class="fab fa-fw fa-facebook-f"></i></a>
-                    <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
-                    <a class="btn btn-outline-light btn-social mx-1" href="#!"><i
+                    <h4 class="text-uppercase mb-4">Ceci est mon projet pour l'UV CDAW</h4>
+                    <a target="_blank" class="btn btn-outline-light btn-social mx-1"
+                        href="https://www.linkedin.com/in/william-nguyen-9193a6152/"><i
                             class="fab fa-fw fa-linkedin-in"></i></a>
-                    <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
+                    <a target="_blank" class="btn btn-outline-light btn-social mx-1"
+                        href="https://github.com/iWilli26"><i class="fab fa-fw fa-github"></i></a>
+
                 </div>
                 <!-- Footer About Text-->
                 <div class="col-lg-4">
-                    <h4 class="text-uppercase mb-4">About Freelancer</h4>
+                    <h4 class="text-uppercase mb-4">About Me</h4>
                     <p class="lead mb-0">
-                        Freelance is a free to use, MIT licensed Bootstrap
-                        theme created by
-                        <a href="http://startbootstrap.com">Start Bootstrap</a>
-                        .
+                        Je m'appelle William Nguyen et je suis étudiant en dernière année à l'IMT Nord Europe.
                     </p>
                 </div>
             </div>

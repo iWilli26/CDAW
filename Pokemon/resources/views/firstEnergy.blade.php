@@ -73,5 +73,8 @@ echo '</div>';
 
 
 ?>
-
+<script>
+const userId = <?php echo $userId ?>;
+console.log(userId);
+</script>
 @endsection
