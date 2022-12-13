@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PC;
+use App\Models\pc;
 use App\Models\Pokemon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +24,7 @@ class ProfileController extends Controller
         }
         //get user
         $user = Auth::user();
-        $pokemonsId = PC::where('user_id', '=', $user->id)->get();
+        $pokemonsId = pc::where('user_id', '=', $user->id)->get();
         $pokemonData = [];
         for ($i = 0; $i < count($pokemonsId); $i++) {
             $pokemonData[$i] = Pokemon::where('id', '=', $pokemonsId[$i]->pokemon_id)->first();

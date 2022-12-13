@@ -11,13 +11,17 @@ use Illuminate\Support\Facades\Redirect;
 
 class Pokemon extends Model
 {
+    public static function releasePokemon(Request $request)
+    {
+        $content = json_decode($request->getContent());
+
+        pc::where('user_id', $content->userId)->where('pokemon_id', $content->pokemonId)->delete();
+    }
     public static function addPokemon(Request $request)
     {
         $content = json_decode($request->getContent());
         //get data of the pokemon in the database
         $pokemon = DB::table('pokemon')->where('id', $content->pokemonId)->first();
-
-
         if (Energy::checkEnergy($content->userId, $pokemon->energy_id)) {
             DB::table('pc')->insert([
                 'user_id' => $content->userId,

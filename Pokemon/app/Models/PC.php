@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
-class PC extends Model
+class pc extends Model
 {
     use HasFactory;
     public static function addPokemon(Request $request)
@@ -18,7 +18,7 @@ class PC extends Model
          * @return \Illuminate\Http\Response*/
         $pokemon = Pokemon::getPokemonById($request->pokemon);
         $user = User::getUserById($request->user);
-        $pc = new PC();
+        $pc = new pc();
         $pc->pokemon_id = $pokemon->pokemon_id;
         $pc->user_id = $user->user_id;
         $pc->save();

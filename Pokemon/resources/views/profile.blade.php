@@ -2,6 +2,7 @@
 @push('head')
 <script src="{{ asset('/js/profile.js') }}"></script>
 <link rel="stylesheet" href="{{ asset('/css/profile.css')}}">
+<meta name="_token" content="{{ csrf_token() }}">
 @endpush
 @section('content')
 <?php
@@ -73,11 +74,15 @@ $user = Auth::user();
             </label>
             </div>
             <button class="btn btn-danger btn-sm rounded-5 release" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
-          </div>';
+          ';
+            echo '<div style="display:none">' . $pokemonData[$i]->id . '</div></div>';
             echo '</div>';
             echo '</div>';
         }
         ?>
     </div>
 </div>
+<script>
+const userId = <?php echo $user->id ?>;
+</script>
 @endsection
