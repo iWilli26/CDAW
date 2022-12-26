@@ -38,5 +38,4 @@ Route::post('/addEnergy', array('as' => 'addEnergy', 'uses' => 'App\Models\Energ
 
 Route::get('/me', array('as' => 'me', 'uses' => 'App\Http\Controllers\ProfileController@getMe'));
 
-
 Route::get('/energyName/{name}', array('as' => 'energy', 'uses' => 'App\Models\Energy@getEnergyByName'));

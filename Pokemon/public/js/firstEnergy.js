@@ -7,6 +7,7 @@ async function getPokemonData(pokemon) {
     return data;
 }
 $(document).ready(function () {
+    console.log(userId);
     const pokemons = {
         fire: ["Chimchar", "Ponyta"],
         water: ["Piplup", "Buizel"],
@@ -60,7 +61,6 @@ $(document).ready(function () {
                         (response) => {
                             response.json().then((data) => {
                                 let energyId = data.id;
-                                console.log(userId, energyId);
                                 fetch(`/addEnergy`, {
                                     method: "POST",
                                     headers: {

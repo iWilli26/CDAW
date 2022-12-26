@@ -12,10 +12,12 @@ class Energy extends Model
     public static function addEnergy(Request $request)
     {
         $content = json_decode($request->getContent());
-        //if it already exists, dont add it
-        $count = DB::table('mastered')->where('energy_id', $content->energyId)->count();
+        echo $content->userId;
+        $count = Mastered::where('user_id', $content->userId)->where('energy_id', $content->energyId)->count();
+        echo $count;
         if ($count == 0) {
-            DB::table('mastered')->insert([
+            //insert into the mastered table the energy and the user
+            Mastered::create([
                 'user_id' => $content->userId,
                 'energy_id' => $content->energyId,
             ]);

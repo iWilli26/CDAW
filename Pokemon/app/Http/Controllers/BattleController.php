@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\pc;
+use App\Models\User;
 
 class BattleController extends Controller
 {
@@ -24,6 +25,11 @@ class BattleController extends Controller
         if ($count == 0) {
             return redirect('/firstEnergy');
         }
-        return view('battleMenu');
+
+        $users = User::all();
+        $users = $users->filter(function ($value, $key) {
+            return pc::where('user_id', '=', $value->id)->count() > 0;
+        });
+        return view('battleMenu', ['me' => $user, 'users' => $users]);
     }
 }

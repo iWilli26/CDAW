@@ -27,11 +27,9 @@
 </div>
 <?php
 
-use App\Models\Energy;
 use Illuminate\Support\Facades\Auth;
 
 $userId = Auth::id();
-//get all energies
 $pokemons = (object)[
     'fire' => [
         'Chimchar',

@@ -15,10 +15,15 @@ class Mastered extends Model
      * @var string
      */
     protected $table = 'mastered';
+    public $timestamps = false;
     /**
      * The database connection that should be used by the model.
      *
      * @var string
      */
     protected $connection = 'mysql';
+    protected $fillable = [
+        'user_id',
+        'energy_id',
+    ];
 }
