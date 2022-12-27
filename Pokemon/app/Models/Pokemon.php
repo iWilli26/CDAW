@@ -41,7 +41,6 @@ class Pokemon extends Model
     }
     public static function getPokemonByName($name)
     {
-        //use models to get the pokemon with the name
         /** 
          * @param  \Illuminate\Http\Request  $request
          * @param  string  $name

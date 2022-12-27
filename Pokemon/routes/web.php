@@ -27,6 +27,7 @@ Route::post('/editAccount', array('as' => 'editAccount', 'uses' => 'App\Http\Con
 Route::post('/createAccount', array('as' => 'createAccount', 'uses' => 'App\Http\Controllers\ProfileController@createAccount'));
 
 Route::get('/firstEnergy/', array('as' => 'firstEnergy', 'uses' => 'App\Http\Controllers\EnergyController@getFirstEnergy'));
+Route::get('/battle/{mode}/{id}', array('as' => 'battle', 'uses' => 'App\Http\Controllers\BattleController@battleStart'));
 
 Route::get('/pokemonId/{id}', array('as' => 'pokemon', 'uses' => 'App\Models\Pokemon@getPokemonById'));
 Route::get('/pokemonName/{name}', array('as' => 'pokemon', 'uses' => 'App\Models\Pokemon@getPokemonByName'));

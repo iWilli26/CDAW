@@ -1,0 +1,16 @@
+#top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#mid {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+#bot {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
