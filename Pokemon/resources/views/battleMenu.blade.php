@@ -26,4 +26,7 @@
         ?>
     </select>
 </div>
+<script>
+let me = <?php echo json_encode($me); ?>;
+</script>
 @endsection

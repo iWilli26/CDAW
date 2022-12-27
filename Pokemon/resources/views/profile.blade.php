@@ -67,15 +67,21 @@ $user = Auth::user();
             echo '<div class="name">' . ucfirst($pokemonData[$i]->name) . '</div>';
             echo '<div class="level">Niveau : ' . $pokemonPC[$i]->level . '</div>';
             echo '<div class="form-check">
-            <div>
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
+            <div>';
+            if ($pokemonPC[$i]->team == 1) {
+                echo '<input class="form-check-input teamCheck" type="checkbox" value="" id="flexCheckDefault" checked>';
+            } else {
+                echo '<input class="form-check-input teamCheck" type="checkbox" value="" id="flexCheckDefault">';
+            }
+            echo '<div style="display:none">' . $pokemonPC[$i]->id . '</div>';
+            echo '<label class="form-check-label" for="flexCheckDefault">
             Team
             </label>
             </div>
             <button class="btn btn-danger btn-sm rounded-5 release" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
           ';
-            echo '<div style="display:none">' . $pokemonData[$i]->id . '</div></div>';
+            echo '<div style="display:none">' . $pokemonData[$i]->id . '</div>';
+            echo '</div>';
             echo '</div>';
             echo '</div>';
         }
@@ -84,5 +90,7 @@ $user = Auth::user();
 </div>
 <script>
 const userId = <?php echo $user->id ?>;
+const pokemonPC = <?php echo json_encode($pokemonPC); ?>;
+const pokemonData = <?php echo json_encode($pokemonData); ?>;
 </script>
 @endsection

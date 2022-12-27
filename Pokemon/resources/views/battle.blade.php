@@ -32,4 +32,11 @@
     }
     ?>
 </div>
+<script>
+let me = <?php echo json_encode($me); ?>;
+let opponent = <?php echo json_encode($opponent); ?>;
+let myPokemon = <?php echo json_encode($myPokemon); ?>;
+let opponentPokemon = <?php echo json_encode($opponentPokemon); ?>;
+let mode = <?php echo json_encode($mode); ?>;
+</script>
 @endsection

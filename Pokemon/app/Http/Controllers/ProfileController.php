@@ -18,11 +18,9 @@ class ProfileController extends Controller
     }
     public static function getProfile()
     {
-        // if not connected, redirect to login
         if (!Auth::check()) {
             return redirect('/login');
         }
-        //get user
         $user = Auth::user();
         $pokemonsId = pc::where('user_id', '=', $user->id)->get();
         $pokemonData = [];

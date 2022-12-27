@@ -14,6 +14,8 @@ class PC extends Model
      * @var string
      */
     protected $table = 'pc';
+    public $timestamps = false;
+
     /**
      * The database connection that should be used by the model.
      *
@@ -25,7 +27,6 @@ class PC extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'entity_id';
     /**
      * The user who mastered this energy.
      */
@@ -37,6 +38,22 @@ class PC extends Model
     {
         return $this->belongsTo(Pokemon::class, 'pokemon_id', 'pokemon_id');
     }
+    public static function addPokemonToTeam($entityId)
+    {
+        $pc = PC::where('id', $entityId)->first();
+        //count the number of pokemon in the team
+        $count = PC::where('user_id', $pc->user_id)->where('team', true)->count();
+        if ($pc->team == true) {
+            $pc->team = false;
+        } else if ($count >= 3) {
+            echo $count;
+            echo "tooMany";
+            return;
+        } else if ($pc->team == false) {
+            $pc->team = true;
+        }
+        $pc->save();
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -44,6 +61,6 @@ class PC extends Model
      */
     protected $fillable = [
         'level',
-        'is_active',
+        'team',
     ];
 }

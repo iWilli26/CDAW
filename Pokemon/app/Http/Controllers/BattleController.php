@@ -26,11 +26,13 @@ class BattleController extends Controller
         if ($count == 0) {
             return redirect('/firstEnergy');
         }
-
         $users = User::all();
-        $users = $users->filter(function ($value, $key) {
-            return pc::where('user_id', '=', $value->id)->count() > 0;
-        });
+        foreach ($users as $key => $user) {
+            $count = pc::where('user_id', '=', $user->id)->where('team', '=', true)->count();
+            if ($count == 0) {
+                unset($users[$key]);
+            }
+        }
         return view('battleMenu', ['me' => $user, 'users' => $users]);
     }
 
