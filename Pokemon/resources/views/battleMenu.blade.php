@@ -23,10 +23,10 @@
                 echo "<option value='$user->id'>$user->username</option>";
             }
         }
+
         ?>
     </select>
 </div>
 <script>
-let me = <?php echo json_encode($me); ?>;
 </script>
 @endsection

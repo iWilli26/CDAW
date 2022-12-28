@@ -21,19 +21,20 @@ class BattleController extends Controller
         if (!Auth::check()) {
             return redirect('/login');
         }
-        $user = Auth::user();
-        $count = pc::where('user_id', '=', $user->id)->count();
+        $me = Auth::user();
+        $count = pc::where('user_id', '=', $me->id)->count();
         if ($count == 0) {
             return redirect('/firstEnergy');
         }
         $users = User::all();
+        //remove users who have no pokemon
         foreach ($users as $key => $user) {
-            $count = pc::where('user_id', '=', $user->id)->where('team', '=', true)->count();
+            $count = pc::where('user_id', '=', $user->id)->count();
             if ($count == 0) {
                 unset($users[$key]);
             }
         }
-        return view('battleMenu', ['me' => $user, 'users' => $users]);
+        return view('battleMenu', ['me' => $me, 'users' => $users]);
     }
 
     public static function battleStart($mode, $id)

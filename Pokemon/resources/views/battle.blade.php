@@ -5,10 +5,26 @@
 <link rel="stylesheet" href="{{ asset('/css/battle.css')}}">
 @endpush
 @section('content')
+<div class="modal" id="modal" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <div style="display: flex;flex-direction:row">
+                    <div class="infos"></div>
+                    <div class="images"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div style="display: flex;flex-direction:column">
+    <button id="test" class="btn btn-primary">oops</button>
     <div id="top">
         <div id="log">log</div>
-        <div id="spriteOpp">Sprite</div>
+        <div id="spriteOpponent">Sprite</div>
     </div>
     <div id="mid">Attack</div>
     <div id="bot">
@@ -17,20 +33,9 @@
     </div>
 </div>
 <div>
-
-    <?php
-    echo $mode;
-    foreach ($myPokemon as $pokemon) {
-        echo $pokemon;
-        echo "<br>";
-    }
-    echo "<br>";
-    echo "<br>";
-    foreach ($opponentPokemon as $pokemon) {
-        echo $pokemon;
-        echo "<br>";
-    }
-    ?>
+    <button id="attack" class="btn btn-primary">Attack</button>
+    <button id="switch" class="btn btn-primary">Switch</button>
+    <button id="run" class="btn btn-primary">Run</button>
 </div>
 <script>
 let me = <?php echo json_encode($me); ?>;

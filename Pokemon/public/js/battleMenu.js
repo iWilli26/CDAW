@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    console.log(me);
     let opponent = document.getElementById("opponent-select").value;
     document
         .getElementById("opponent-select")
