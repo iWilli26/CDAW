@@ -40,8 +40,23 @@
     cursor: pointer;
 }
 img {
+    width: 100px;
+    height: 100px;
 }
-#spriteMe #spriteOpponent {
-    width: 400px;
-    height: 400px;
+#spriteMe img {
+    width: 250px;
+    height: 250px;
+}
+#spriteOpponent img {
+    width: 250px;
+    height: 250px;
+}
+#command {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+#command button {
+    width: 20vw;
+    height: 10vh;
 }

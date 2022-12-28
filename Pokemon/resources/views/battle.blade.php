@@ -21,10 +21,12 @@
     </div>
 </div>
 <div style="display: flex;flex-direction:column">
-    <button id="test" class="btn btn-primary">oops</button>
     <div id="top">
         <div id="log">log</div>
-        <div id="spriteOpponent">Sprite</div>
+        <div id="spriteOpponent">
+            Sprite
+
+        </div>
     </div>
     <div id="mid">Attack</div>
     <div id="bot">
@@ -32,10 +34,11 @@
         <div id="as">jsp</div>
     </div>
 </div>
-<div>
+<div id="command">
+    <div id="turn"></div>
     <button id="attack" class="btn btn-primary">Attack</button>
-    <button id="switch" class="btn btn-primary">Switch</button>
-    <button id="run" class="btn btn-primary">Run</button>
+    <button id="special" class="btn btn-primary">Special</button>
+    <button id="defense" class="btn btn-primary">Defense</button>
 </div>
 <script>
 let me = <?php echo json_encode($me); ?>;

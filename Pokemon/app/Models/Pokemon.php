@@ -80,7 +80,7 @@ class Pokemon extends Model
      */
     protected $fillable = [
         'name',
-        'pv_max',
+        'pv',
         'level',
         'image',
         'attack',
