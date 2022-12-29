@@ -15,22 +15,27 @@ $(document).ready(function () {
         });
     });
     $(".teamCheck").change(function () {
-        //count how many are checked
-        let count = 0;
-        $(".teamCheck").each(function () {
-            if (this.checked) {
-                count++;
-            }
-        });
-        if (count > 3) {
-            this.checked = false;
-        }
         let entityId = parseInt(this.nextElementSibling.innerText);
         fetch(`/pokemonTeam/` + entityId, {
             method: "POST",
             headers: {
                 "X-CSRF-Token": $('meta[name="_token"]').attr("content"),
             },
-        }).then((response) => {});
+        }).then((response) => {
+            response.json().then((data) => {
+                if (data === "level too low") {
+                    alert("Pokemon level is too low to be on your team");
+                    this.checked = false;
+                } else if (data === "team full") {
+                    alert("Your team is full");
+                    this.checked = false;
+                } else if (data === "energy not mastered") {
+                    alert("Pokemon energy is not mastered");
+                    this.checked = false;
+                } else {
+                    return;
+                }
+            });
+        });
     });
 });

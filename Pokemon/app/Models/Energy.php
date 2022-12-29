@@ -12,11 +12,8 @@ class Energy extends Model
     public static function addEnergy(Request $request)
     {
         $content = json_decode($request->getContent());
-        echo $content->userId;
         $count = Mastered::where('user_id', $content->userId)->where('energy_id', $content->energyId)->count();
-        echo $count;
         if ($count == 0) {
-            //insert into the mastered table the energy and the user
             Mastered::create([
                 'user_id' => $content->userId,
                 'energy_id' => $content->energyId,

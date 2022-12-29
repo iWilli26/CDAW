@@ -55,6 +55,9 @@ class Pokemon extends Model
     {
         return $this->hasOne(Energy::class);
     }
+
+
+
     /**
      * The table associated with the model.
      *
@@ -72,7 +75,7 @@ class Pokemon extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'pokemon_id';
+    protected $primaryKey = 'id';
     /**
      * The attributes that are mass assignable.
      *
@@ -87,6 +90,7 @@ class Pokemon extends Model
         'defense',
         'special_defense',
         'special_attack',
+        'speed',
         'evolve_to',
     ];
 }

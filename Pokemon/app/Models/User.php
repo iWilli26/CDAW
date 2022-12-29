@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
@@ -43,6 +44,20 @@ class User extends Authenticatable
          * @param  string  $id
          * @return \Illuminate\Http\Response*/
         return (DB::table('users')->where('id', $id)->first());
+    }
+    public static function addLevel($id)
+    {
+        /** 
+         * @param  \Illuminate\Http\Request  $request
+         * @param  string  $id
+         * @return \Illuminate\Http\Response*/
+        //use models 
+        $user = User::find($id);
+        $user->level = $user->level + 1;
+        if ($user->level > 10) {
+            $user->level = 10;
+        }
+        $user->save();
     }
 
     /**

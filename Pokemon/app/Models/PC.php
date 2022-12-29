@@ -30,6 +30,17 @@ class PC extends Model
     /**
      * The user who mastered this energy.
      */
+    public static function addLevel($id)
+    {
+        /** 
+         * @param  \Illuminate\Http\Request  $request
+         * @param  string  $id
+         * @return \Illuminate\Http\Response*/
+        //use models 
+        $pc = PC::where('id', $id)->first();
+        $pc->level = $pc->level + 1;
+        $pc->save();
+    }
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'user_id');
@@ -41,16 +52,25 @@ class PC extends Model
     public static function addPokemonToTeam($entityId)
     {
         $pc = PC::where('id', $entityId)->first();
-        //count the number of pokemon in the team
+        $user = User::where('id', $pc->user_id)->first();
         $count = PC::where('user_id', $pc->user_id)->where('team', true)->count();
+
+        //check if user has mastered the energy of the pokemon
+        $energy = Energy::where('name', $pc->pokemon->energy)->first();
+        $mastered = Mastered::where('user_id', $pc->user_id)->where('energy_id', $energy->id)->count();
+
         if ($pc->team == true) {
             $pc->team = false;
+            echo json_encode("removed from team");
         } else if ($count >= 3) {
-            echo $count;
-            echo "tooMany";
-            return;
+            echo json_encode("team full");
+        } else if ($pc->level > $user->level) {
+            echo json_encode("level too low");
+        } else if ($mastered == 0) {
+            echo json_encode("energy not mastered");
         } else if ($pc->team == false) {
             $pc->team = true;
+            echo json_encode("added to team");
         }
         $pc->save();
     }

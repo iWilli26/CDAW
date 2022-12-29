@@ -29,7 +29,7 @@ $(document).ready(function () {
                     data.id +
                     "</p>" +
                     "<p>Hp : " +
-                    data.pv_max +
+                    data.pv +
                     "</p>" +
                     "<p>Attack : " +
                     data.attack +
@@ -43,6 +43,8 @@ $(document).ready(function () {
                     "<p>Special Defense : " +
                     data.special_defense +
                     "</p>" +
+                    "<p>Speed : " +
+                    data.speed +
                     "<p>Energy : " +
                     energy +
                     "</p>";

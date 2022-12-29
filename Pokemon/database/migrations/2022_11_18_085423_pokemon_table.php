@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('back');
             $table->string('front');
-            $table->bigInteger('pv_max');
+            $table->bigInteger('pv');
             $table->timestamps();
             $table->unsignedBigInteger('energy_id');
             $table->foreign('energy_id')->references('id')->on('energy');
@@ -28,6 +28,7 @@ return new class extends Migration
             $table->bigInteger('defense');
             $table->bigInteger('special_attack');
             $table->bigInteger('special_defense');
+            $table->bigInteger('speed');
         });
     }
 

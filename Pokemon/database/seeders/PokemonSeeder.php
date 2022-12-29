@@ -59,13 +59,14 @@ class PokemonSeeder extends Seeder
             // $evolution_chain = getNextEvolution($pokemon_id);
             DB::table('pokemon')->insert([
                 'name' => $pokemon->name,
-                'pv_max' => $pokemon->stats[0]->base_stat,
+                'pv' => $pokemon->stats[0]->base_stat,
                 'front' => $pokemon->sprites->front_default,
                 'back' => $pokemon->sprites->back_default,
                 'attack' => $pokemon->stats[1]->base_stat,
                 'defense' => $pokemon->stats[2]->base_stat,
                 'special_defense' => $pokemon->stats[2]->base_stat,
                 'special_attack' => $pokemon->stats[3]->base_stat,
+                'speed' => $pokemon->stats[5]->base_stat,
                 'energy_id' => $energy_id,
             ]);
         }

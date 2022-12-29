@@ -42,3 +42,8 @@ Route::get('/me', array('as' => 'me', 'uses' => 'App\Http\Controllers\ProfileCon
 Route::get('/energyName/{name}', array('as' => 'energy', 'uses' => 'App\Models\Energy@getEnergyByName'));
 
 Route::post('/pokemonTeam/{id}', array('as' => 'addEnergy', 'uses' => 'App\Models\pc@addPokemonToTeam'));
+
+Route::post('/addLevel/{id}', array('as' => 'addLevel', 'uses' => 'App\Models\user@addLevel'));
+Route::post('/addLevelPokemon/{id}', array('as' => 'addLevel', 'uses' => 'App\Models\pc@addLevel'));
+
+Route::post('/addFight/', array('as' => 'addLevel', 'uses' => 'App\Models\fight@addFight'));
