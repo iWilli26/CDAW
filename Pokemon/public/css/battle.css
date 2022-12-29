@@ -60,3 +60,14 @@ img {
     width: 20vw;
     height: 10vh;
 }
+#log {
+    display: flex;
+    flex-direction: column;
+    height: 30vh;
+    width: 30vw;
+    background-color: rgb(200, 200, 200);
+    overflow-y: scroll;
+}
+.dead img {
+    transform: scaleY(-1) translateY(-20px);
+}

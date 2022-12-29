@@ -31,8 +31,6 @@ $(document).ready(function () {
             headers: {
                 "X-CSRF-Token": $('meta[name="_token"]').attr("content"),
             },
-        }).then((response) => {
-            console.log(response);
-        });
+        }).then((response) => {});
     });
 });

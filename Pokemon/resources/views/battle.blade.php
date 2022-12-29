@@ -22,7 +22,7 @@
 </div>
 <div style="display: flex;flex-direction:column">
     <div id="top">
-        <div id="log">log</div>
+        <div id="log"></div>
         <div id="spriteOpponent">
             Sprite
 
@@ -31,7 +31,6 @@
     <div id="mid">Attack</div>
     <div id="bot">
         <div id="spriteMe">Sprite</div>
-        <div id="as">jsp</div>
     </div>
 </div>
 <div id="command">
@@ -46,5 +45,6 @@ let opponent = <?php echo json_encode($opponent); ?>;
 let myPokemon = <?php echo json_encode($myPokemon); ?>;
 let opponentPokemon = <?php echo json_encode($opponentPokemon); ?>;
 let mode = <?php echo json_encode($mode); ?>;
+console.log(me, opponent);
 </script>
 @endsection
