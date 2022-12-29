@@ -54,7 +54,6 @@ class BattleController extends Controller
         }
         $opponent = User::find($id);
         $opponentPokemon = pc::where('user_id', '=', $id)->get();
-        //add for each opponentPokemon the pokemon data
         foreach ($opponentPokemon as $pokemon) {
             $pokemon->data = Pokemon::getPokemonById($pokemon->pokemon_id);
         }

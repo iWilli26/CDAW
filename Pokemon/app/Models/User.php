@@ -24,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'level',
+        'beaten',
         'is_admin',
     ];
 
@@ -59,7 +60,17 @@ class User extends Authenticatable
         }
         $user->save();
     }
-
+    public static function addBeaten($id)
+    {
+        /** 
+         * @param  \Illuminate\Http\Request  $request
+         * @param  string  $id
+         * @return \Illuminate\Http\Response*/
+        //use models 
+        $user = User::find($id);
+        $user->level = $user->beaten + 1;
+        $user->save();
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

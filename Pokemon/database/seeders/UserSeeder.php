@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
             'email' => 'willi.nguyen@hotmail.fr',
             'password' => bcrypt('Password'),
             'is_admin' => true,
+            'beaten' => 0,
             'level' => 1,
         ];
 

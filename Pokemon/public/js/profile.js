@@ -22,6 +22,7 @@ $(document).ready(function () {
                 "X-CSRF-Token": $('meta[name="_token"]').attr("content"),
             },
         }).then((response) => {
+            console.log(response);
             response.json().then((data) => {
                 if (data === "level too low") {
                     alert("Pokemon level is too low to be on your team");

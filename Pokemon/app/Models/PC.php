@@ -39,26 +39,24 @@ class PC extends Model
         //use models 
         $pc = PC::where('id', $id)->first();
         $pc->level = $pc->level + 1;
+        if ($pc->level > 10) {
+            $pc->level = 10;
+        }
         $pc->save();
     }
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
-    public function pokemon()
-    {
-        return $this->belongsTo(Pokemon::class, 'pokemon_id', 'pokemon_id');
-    }
+
     public static function addPokemonToTeam($entityId)
     {
         $pc = PC::where('id', $entityId)->first();
         $user = User::where('id', $pc->user_id)->first();
         $count = PC::where('user_id', $pc->user_id)->where('team', true)->count();
-
-        //check if user has mastered the energy of the pokemon
-        $energy = Energy::where('name', $pc->pokemon->energy)->first();
+        $pokemon = Pokemon::where('id', $pc->pokemon_id)->first();
+        $energy = Energy::where('id', $pokemon->energy_id)->first();
         $mastered = Mastered::where('user_id', $pc->user_id)->where('energy_id', $energy->id)->count();
-
         if ($pc->team == true) {
             $pc->team = false;
             echo json_encode("removed from team");

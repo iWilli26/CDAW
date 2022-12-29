@@ -78,9 +78,9 @@ class ProfileController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'level' => 1,
+            'beaten' => 0,
             'is_admin' => false,
         ]);
-        //Login
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             return redirect()->intended('/');

@@ -64,7 +64,7 @@ class PokemonSeeder extends Seeder
                 'back' => $pokemon->sprites->back_default,
                 'attack' => $pokemon->stats[1]->base_stat,
                 'defense' => $pokemon->stats[2]->base_stat,
-                'special_defense' => $pokemon->stats[2]->base_stat,
+                'special_defense' => $pokemon->stats[4]->base_stat,
                 'special_attack' => $pokemon->stats[3]->base_stat,
                 'speed' => $pokemon->stats[5]->base_stat,
                 'energy_id' => $energy_id,

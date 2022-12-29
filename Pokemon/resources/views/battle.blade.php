@@ -28,7 +28,7 @@
 
         </div>
     </div>
-    <div id="mid">Attack</div>
+    <div id="mid"></div>
     <div id="bot">
         <div id="spriteMe">Sprite</div>
     </div>
@@ -45,6 +45,5 @@ let opponent = <?php echo json_encode($opponent); ?>;
 let myPokemon = <?php echo json_encode($myPokemon); ?>;
 let opponentPokemon = <?php echo json_encode($opponentPokemon); ?>;
 let mode = <?php echo json_encode($mode); ?>;
-console.log(me, opponent);
 </script>
 @endsection
