@@ -39,15 +39,14 @@
                     <li class="nav-item mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded" href="/battleMenu">Battle</a>
                     </li>
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="/profile">Profile</a>
+                    </li>
                     @if (Auth::check())
                     <li class="nav-item mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded" href="/logout">Logout</a>
                     </li>
                     @endif
-
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="/profile">Profile</a>
-                    </li>
                 </ul>
             </div>
         </div>

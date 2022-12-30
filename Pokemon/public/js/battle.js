@@ -1,11 +1,12 @@
 $(document).ready(function () {
-    //put piplup hp to 0
     let title = document.getElementsByClassName("modal-title")[0];
     let images = document.getElementsByClassName("images")[0];
     let modal = document.getElementById("modal");
     let log = document.getElementById("log");
     const spriteMe = document.getElementById("spriteMe");
     const spriteOpponent = document.getElementById("spriteOpponent");
+    let pokemonTeam1 = [];
+    let pokemonTeam2 = [];
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
@@ -189,21 +190,19 @@ $(document).ready(function () {
             log.scrollTo(0, log.scrollHeight);
         }
         if (pokemon1.data.pv <= 0) {
-            fetch("http://localhost:8000/addLevel/" + opponent.id, {
+            fetch("/addLevel/" + opponent.id + "/", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
                     "X-CSRF-Token": $('meta[name="_token"]').attr("content"),
                 },
             });
-            fetch("http://localhost:8000/addLevelPokemon/" + pokemon2.id, {
+            fetch("/addLevelPokemon/" + pokemon2.id + "/", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
                     "X-CSRF-Token": $('meta[name="_token"]').attr("content"),
                 },
             });
-            fetch(`"http://localhost:8000/addEnergy`, {
+            fetch("/addEnergy/", {
                 method: "POST",
                 headers: {
                     "X-CSRF-Token": $('meta[name="_token"]').attr("content"),
@@ -213,7 +212,7 @@ $(document).ready(function () {
                     userId: opponent.id,
                 }),
             });
-            fetch(`"http://localhost:8000/addBeaten/` + opponent.id, {
+            fetch("/addBeaten/" + opponent.id + "/", {
                 method: "POST",
                 headers: {
                     "X-CSRF-Token": $('meta[name="_token"]').attr("content"),
@@ -226,10 +225,9 @@ $(document).ready(function () {
             spriteMe.classList.add("dead");
             myPokemon = myPokemon.filter((pokemon) => pokemon.id != id1);
             if (myPokemon.length == 0) {
-                fetch("http://localhost:8000/addFight/", {
+                fetch("/addFight/", {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json",
                         "X-CSRF-Token": $('meta[name="_token"]').attr(
                             "content"
                         ),
@@ -237,6 +235,8 @@ $(document).ready(function () {
                     body: JSON.stringify({
                         winner: opponent.id,
                         loser: me.id,
+                        pokemonWinner: pokemonTeam2,
+                        pokemonLoser: pokemonTeam1,
                     }),
                 });
                 alert(me.username + " a perdu");
@@ -256,21 +256,19 @@ $(document).ready(function () {
                 battle(idnext, id2, "fullRandom");
             }
         } else {
-            fetch("http://localhost:8000/addLevel/" + me.id, {
+            fetch("/addLevel/" + me.id, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
                     "X-CSRF-Token": $('meta[name="_token"]').attr("content"),
                 },
             });
-            fetch("http://localhost:8000/addLevelPokemon/" + pokemon1.id, {
+            fetch("/addLevelPokemon/" + pokemon1.id, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
                     "X-CSRF-Token": $('meta[name="_token"]').attr("content"),
                 },
             });
-            fetch(`/addEnergy`, {
+            fetch("/addEnergy/", {
                 method: "POST",
                 headers: {
                     "X-CSRF-Token": $('meta[name="_token"]').attr("content"),
@@ -280,7 +278,7 @@ $(document).ready(function () {
                     userId: me.id,
                 }),
             });
-            fetch(`"http://localhost:8000/addBeaten/` + me.id, {
+            fetch("/addBeaten/" + me.id + "/", {
                 method: "POST",
                 headers: {
                     "X-CSRF-Token": $('meta[name="_token"]').attr("content"),
@@ -296,10 +294,9 @@ $(document).ready(function () {
             );
             if (opponentPokemon.length == 0) {
                 alert(opponent.username + " a perdu");
-                fetch("http://localhost:8000/addFight/", {
+                fetch("/addFight/", {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json",
                         "X-CSRF-Token": $('meta[name="_token"]').attr(
                             "content"
                         ),
@@ -307,6 +304,8 @@ $(document).ready(function () {
                     body: JSON.stringify({
                         winner: me.id,
                         loser: opponent.id,
+                        pokemonWinner: pokemonTeam1,
+                        pokemonLoser: pokemonTeam2,
                     }),
                 });
                 return;
@@ -366,6 +365,8 @@ $(document).ready(function () {
         }
         let pokemon1 = myPokemon.filter((pokemon) => pokemon.team == 1);
         let pokemon2 = opponentPokemon.filter((pokemon) => pokemon.team == 1);
+        pokemonTeam1 = pokemon1.map((pokemon) => pokemon.id);
+        pokemonTeam2 = pokemon2.map((pokemon) => pokemon.id);
         if (pokemon1.length == 0 || pokemon2.length == 0) {
             alert("Please select at least a pokemon for each team");
             window.location.href = "/battleMenu";

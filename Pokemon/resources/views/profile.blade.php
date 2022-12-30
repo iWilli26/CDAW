@@ -8,6 +8,7 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 $user = Auth::user();
 ?>
@@ -49,6 +50,7 @@ $user = Auth::user();
                         <input type="text" class="form-control" name="password">
                     </div>
                     <div><strong>Niveau : </strong> {{$user->level}}</div>
+                    <div><strong>Nombre de pokémons battus : </strong> {{$user->beaten}}</div>
                 </div>
                 <button type="submit" class="mt-2 btn btn-primary">
                     {{ __('Edit') }}
@@ -87,8 +89,60 @@ $user = Auth::user();
         }
         ?>
     </div>
+
+    <div id="history">
+        <?php
+        for ($i = 0; $i < count($fight); $i++) {
+            $pokemonWinner = [$fight[$i]->winner_pokemon_id1, $fight[$i]->winner_pokemon_id2, $fight[$i]->winner_pokemon_id3];
+            $pokemonLoser = [$fight[$i]->loser_pokemon_id1, $fight[$i]->loser_pokemon_id2, $fight[$i]->loser_pokemon_id3];
+            $winner = User::find($fight[$i]->winner_id)->username;
+            $loser = User::find($fight[$i]->loser_id)->username;
+            if ($fight[$i]->winner_id == $user->id) {
+                echo '<div class="fight winner">';
+                echo '<div class="teamInfos">' . $winner;
+                echo '<div class="pokemonInfos">';
+                foreach ($sprites[$i][0] as $sprite) {
+                    echo '<img src="' . $sprite . '" alt="pokemon">';
+                }
+                echo '</div>';
+                echo '</div>';
+                echo '<div class="vs">VS</div>';
+                echo '<div class="teamInfos">' . $loser;
+                echo '<div class="pokemonInfos">';
+                foreach ($sprites[$i][1] as $sprite) {
+                    echo '<img src="' . $sprite . '" alt="pokemon">';
+                }
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+            } else {
+                echo '<div class="fight loser">';
+                echo '<div class="teamInfos">' . $loser;
+                echo '<div class="pokemonInfos">';
+                foreach ($sprites[$i][1] as $sprite) {
+                    echo '<img src="' . $sprite . '" alt="pokemon">';
+                }
+                echo '</div>';
+                echo '</div>';
+                echo '<div class="vs">VS</div>';
+                echo '<div class="teamInfos">' . $winner;
+                echo '<div class="pokemonInfos">';
+                foreach ($sprites[$i][0] as $sprite) {
+                    echo '<img src="' . $sprite . '" alt="pokemon">';
+                }
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+            }
+        }
+        ?>
+    </div>
 </div>
 <script>
+const fight = <?php echo json_encode($fight); ?>;
+const sprites = <?php echo json_encode($sprites); ?>;
+console.log(sprites);
+console.log(fight);
 const userId = <?php echo $user->id ?>;
 const pokemonPC = <?php echo json_encode($pokemonPC); ?>;
 const pokemonData = <?php echo json_encode($pokemonData); ?>;

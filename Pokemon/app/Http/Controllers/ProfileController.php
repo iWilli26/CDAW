@@ -27,7 +27,49 @@ class ProfileController extends Controller
         for ($i = 0; $i < count($pokemonsId); $i++) {
             $pokemonData[$i] = Pokemon::where('id', '=', $pokemonsId[$i]->pokemon_id)->first();
         }
-        return view('profile', ['user' => $user, 'pokemonPC' => $pokemonsId, 'pokemonData' => $pokemonData]);
+        $fights = DB::table('fight')
+            ->where('winner_id', '=', $user->id)
+            ->orWhere('loser_id', '=', $user->id)
+            ->get();
+
+        //add the front image to the pokemon
+        $sprites = [];
+        for ($i = 0; $i < count($fights); $i++) {
+            $spriteWinner = [];
+            $spriteLoser = [];
+            $pokemon1 = pc::where('id', '=', $fights[$i]->winner_pokemon_id1)->first();
+            if ($pokemon1 != null) {
+                $pokemon1 = Pokemon::where('id', '=', $pokemon1->pokemon_id)->first();
+                array_push($spriteWinner, $pokemon1->front);
+            }
+            $pokemon2 = pc::where('id', '=', $fights[$i]->winner_pokemon_id2)->first();
+            if ($pokemon2 != null) {
+                $pokemon2 = Pokemon::where('id', '=', $pokemon2->pokemon_id)->first();
+                array_push($spriteWinner, $pokemon2->front);
+            }
+            $pokemon3 = pc::where('id', '=', $fights[$i]->winner_pokemon_id3)->first();
+            if ($pokemon3 != null) {
+                $pokemon3 = Pokemon::where('id', '=', $pokemon3->pokemon_id)->first();
+                array_push($spriteWinner, $pokemon3->front);
+            }
+            $pokemon4 = pc::where('id', '=', $fights[$i]->loser_pokemon_id1)->first();
+            if ($pokemon4 != null) {
+                $pokemon4 = Pokemon::where('id', '=', $pokemon4->pokemon_id)->first();
+                array_push($spriteLoser, $pokemon4->front);
+            }
+            $pokemon5 = pc::where('id', '=', $fights[$i]->loser_pokemon_id2)->first();
+            if ($pokemon5 != null) {
+                $pokemon5 = Pokemon::where('id', '=', $pokemon5->pokemon_id)->first();
+                array_push($spriteLoser, $pokemon5->front);
+            }
+            $pokemon6 = pc::where('id', '=', $fights[$i]->loser_pokemon_id3)->first();
+            if ($pokemon6 != null) {
+                $pokemon6 = Pokemon::where('id', '=', $pokemon6->pokemon_id)->first();
+                array_push($spriteLoser, $pokemon6->front);
+            }
+            array_push($sprites, [$spriteWinner, $spriteLoser]);
+        }
+        return view('profile', ['user' => $user, 'pokemonPC' => $pokemonsId, 'pokemonData' => $pokemonData, 'fight' => $fights, 'sprites' => $sprites]);
     }
     public static function deleteProfile()
     {

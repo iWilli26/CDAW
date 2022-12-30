@@ -68,7 +68,7 @@ class User extends Authenticatable
          * @return \Illuminate\Http\Response*/
         //use models 
         $user = User::find($id);
-        $user->level = $user->beaten + 1;
+        $user->beaten = $user->beaten + 1;
         $user->save();
     }
     /**

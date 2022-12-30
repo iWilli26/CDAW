@@ -23,3 +23,41 @@
 .infos {
     width: 100%;
 }
+.winner {
+    background-color: #85ce61;
+}
+.loser {
+    background-color: #f78989;
+}
+.fight {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+}
+.teamInfos {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    color: #e5eaf3;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.5em;
+    font-weight: 700;
+    width: 400px;
+}
+.pokemonInfos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+}
+.vs {
+    font-size: 2em;
+    font-weight: 700;
+    color: #e5eaf3;
+    font-family: "Roboto", sans-serif;
+}

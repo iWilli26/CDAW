@@ -48,4 +48,4 @@ Route::post('/addLevelPokemon/{id}', array('as' => 'addLevel', 'uses' => 'App\Mo
 
 Route::post('/addFight/', array('as' => 'addLevel', 'uses' => 'App\Models\fight@addFight'));
 
-Route::post('/addBeaten/', array('as' => 'addLevel', 'uses' => 'App\Models\user@addBeaten'));
+Route::post('/addBeaten/{id}', array('as' => 'addLevel', 'uses' => 'App\Models\user@addBeaten'));
