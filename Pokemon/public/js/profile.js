@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    //relache le pokemon
     $(".release").click(function () {
         let pokemonId = parseInt(this.nextElementSibling.innerText);
         fetch(`/releasePokemon`, {
@@ -14,6 +15,8 @@ $(document).ready(function () {
             window.location.href = "/profile";
         });
     });
+
+    //ajoute le pokemon a l'equipe ou le retire
     $(".teamCheck").change(function () {
         let entityId = parseInt(this.nextElementSibling.innerText);
         fetch(`/pokemonTeam/` + entityId, {
@@ -22,7 +25,6 @@ $(document).ready(function () {
                 "X-CSRF-Token": $('meta[name="_token"]').attr("content"),
             },
         }).then((response) => {
-            console.log(response);
             response.json().then((data) => {
                 if (data === "level too low") {
                     alert("Pokemon level is too low to be on your team");

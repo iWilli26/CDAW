@@ -7,7 +7,6 @@ async function getPokemonData(pokemon) {
     return data;
 }
 $(document).ready(function () {
-    console.log(userId);
     const pokemons = {
         fire: ["Chimchar", "Ponyta"],
         water: ["Piplup", "Buizel"],
@@ -17,12 +16,16 @@ $(document).ready(function () {
         rock: ["Geodude"],
         fighting: ["Machop", "Riolu"],
     };
+
+    //affiche la modal avec les pokemons de l'energie cliquée
     let modal = document.getElementById("infos");
     window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = "none";
         }
     };
+
+    //ajoute le pokemon et l'énergie à la liste du joueur
     $(".btn").click(function () {
         var energy = $(this).text();
         modal.style.display = "block";
@@ -54,7 +57,6 @@ $(document).ready(function () {
                             pokemon[i].name.toLowerCase()
                         ) {
                             pokemonId = pokemon[i].id;
-                            console.log(userId, pokemonId);
                         }
                     }
                     fetch("energyName/" + energy.toLowerCase()).then(

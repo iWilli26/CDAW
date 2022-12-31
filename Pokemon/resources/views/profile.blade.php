@@ -141,8 +141,6 @@ $user = Auth::user();
 <script>
 const fight = <?php echo json_encode($fight); ?>;
 const sprites = <?php echo json_encode($sprites); ?>;
-console.log(sprites);
-console.log(fight);
 const userId = <?php echo $user->id ?>;
 const pokemonPC = <?php echo json_encode($pokemonPC); ?>;
 const pokemonData = <?php echo json_encode($pokemonData); ?>;

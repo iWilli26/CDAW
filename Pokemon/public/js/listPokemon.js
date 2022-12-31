@@ -9,7 +9,10 @@ $(document).ready(function () {
             modal.style.display = "none";
         }
     };
+
+    //affiche la modal avec les infos du pokemon
     $(".fl-table").on("click", (event) => {
+        $("#addPokemon").off("click");
         let id = $(event.target).closest("tr")[0].children[0].innerHTML;
         let energy = $(event.target).closest("tr")[0].children[3].innerHTML;
         fetch("/pokemonId/" + id)
@@ -17,6 +20,30 @@ $(document).ready(function () {
             .then((data) => {
                 document.getElementsByClassName("modal-title")[0].innerHTML =
                     capitalizeFirstLetter(data.name);
+                $("#addPokemon").on("click", function () {
+                    fetch(`/addPokemon`, {
+                        method: "POST",
+                        headers: {
+                            "X-CSRF-Token": $('meta[name="_token"]').attr(
+                                "content"
+                            ),
+                        },
+                        body: JSON.stringify({
+                            pokemonId: parseInt(id),
+                            userId: userId,
+                        }),
+                    }).then((response) => {
+                        response.json().then((data) => {
+                            if (data == "success") {
+                                alert("Pokemon ajouté");
+                            } else if (data == "energyError") {
+                                alert("Vous ne maîtrisez pas cette énergie");
+                            } else {
+                                alert("Erreur lors de l'ajout du pokemon");
+                            }
+                        });
+                    });
+                });
                 document.getElementsByClassName("images")[0].innerHTML =
                     "<img src='" +
                     data.front +

@@ -34,6 +34,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    border: black 1px solid;
+    border-radius: 10px;
     margin: 10px;
 }
 .teamInfos {
@@ -60,4 +62,12 @@
     font-weight: 700;
     color: #e5eaf3;
     font-family: "Roboto", sans-serif;
+}
+#history {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 60vh;
+    overflow-y: scroll;
 }

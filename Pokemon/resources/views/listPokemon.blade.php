@@ -2,6 +2,7 @@
 @push('head')
 <script src="{{ asset('/js/listPokemon.js') }}"></script>
 <link rel="stylesheet" href="{{ asset('/css/listPokemon.css')}}">
+<meta name="_token" content="{{ csrf_token() }}">
 @endpush
 @section('content')
 <div>
@@ -23,6 +24,9 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h4 class="modal-title"></h4>
+                                @if (Auth::check())
+                                <button class="btn btn-primary" id="addPokemon">Catch</button>
+                                @endif
                             </div>
                             <div class="modal-body">
                                 <div style="display: flex;flex-direction:row">
@@ -52,4 +56,13 @@
         </table>
     </div>
 </div>
+<?php
+
+use Illuminate\Support\Facades\Auth;
+
+$userId = Auth::id();
+?>
+<script>
+const userId = <?php echo $userId; ?>;
+</script>
 @endsection

@@ -1,4 +1,46 @@
 $(document).ready(function () {
+    //table des types pokemon et leurs multiplicateurs de dégats
+    //1 : normal
+    //2 : fighting
+    //3 : flying
+    //4 : poison
+    //5 : ground
+    //6 : rock
+    //7 : bug
+    //8 : ghost
+    //9 : steel
+    //10 : fire
+    //11 : water
+    //12 : grass
+    //13 : electric
+    //14 : psychic
+    //15 : ice
+    //16 : dragon
+    //17 : dark
+    //18 : fairy
+    const types = [
+        [1, 1, 1, 1, 1, 0.5, 1, 0, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [2, 1, 0.5, 0.5, 1, 2, 0.5, 0, 2, 1, 1, 1, 1, 0.5, 2, 1, 2, 0.5],
+        [1, 2, 1, 1, 1, 0.5, 2, 1, 0.5, 1, 1, 2, 0.5, 1, 1, 1, 1, 1],
+        [1, 1, 1, 0.5, 0.5, 0.5, 1, 0.5, 0, 1, 1, 2, 1, 1, 1, 1, 1, 2],
+        [1, 1, 0, 2, 1, 2, 0.5, 1, 2, 2, 1, 0.5, 2, 1, 1, 1, 1, 1],
+        [1, 0.5, 2, 1, 0.5, 1, 2, 1, 0.5, 2, 1, 1, 1, 1, 2, 1, 1, 1],
+        [1, 0.5, 0.5, 0.5, 1, 1, 1, 0.5, 0.5, 0.5, 1, 2, 1, 2, 1, 1, 2, 0.5],
+        [0, 0, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 0.5, 1],
+        [1, 1, 1, 1, 1, 2, 1, 1, 0.5, 0.5, 0.5, 1, 0.5, 1, 2, 1, 1, 2],
+        [1, 1, 1, 1, 1, 0.5, 2, 1, 2, 0.5, 0.5, 2, 1, 1, 2, 0.5, 1, 1],
+        [1, 1, 1, 1, 2, 2, 1, 1, 1, 2, 0.5, 0.5, 1, 1, 1, 0.5, 1, 1],
+        [1, 1, 0.5, 0.5, 2, 2, 0.5, 1, 0.5, 0.5, 2, 0.5, 1, 1, 1, 0.5, 1, 1],
+        [1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 2, 0.5, 0.5, 1, 1, 0.5, 1, 1],
+        [1, 2, 1, 2, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 0, 1],
+        [1, 1, 2, 1, 2, 1, 1, 1, 0.5, 0.5, 0.5, 2, 1, 1, 0.5, 2, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 0.5, 0.5, 0.5, 1, 2, 2, 1, 0],
+        [1, 0.5, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 0.5, 0.5],
+        [1, 2, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 2, 2, 1],
+    ];
+
+    myPokemon = myPokemon.filter((pokemon) => pokemon.team == 1);
+    opponentPokemon = opponentPokemon.filter((pokemon) => pokemon.team == 1);
     let title = document.getElementsByClassName("modal-title")[0];
     let images = document.getElementsByClassName("images")[0];
     let modal = document.getElementById("modal");
@@ -7,9 +49,12 @@ $(document).ready(function () {
     const spriteOpponent = document.getElementById("spriteOpponent");
     let pokemonTeam1 = [];
     let pokemonTeam2 = [];
+    //fonctino qui permet de mettre la première lettre en majuscule
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
+
+    //Change les stats du pokemon en fonction de son niveau
     const levelStats = (pokemon) => {
         pokemon.data.attack = ~~(
             pokemon.data.attack +
@@ -38,6 +83,8 @@ $(document).ready(function () {
         );
         return pokemon;
     };
+
+    //Place le sprite du pokemon
     const displaySprite = (pokemon1, pokemon2) => {
         spriteMe.innerHTML =
             "<img src='" +
@@ -48,15 +95,22 @@ $(document).ready(function () {
             pokemon2.data.front +
             "' alt='image du pokemon'><div id='opponent-pv'></div>";
     };
+
+    //Mets à jour les pv du pokemon
     const updatePV = (pokemon1, pokemon2) => {
         document.getElementById("health1").value = `${pokemon1.data.pv}`;
         document.getElementById("health2").value = `${pokemon2.data.pv}`;
     };
+
+    //Choix de l'action du joueur
     async function moves(pokemonTurn, pokemonNot) {
         let promise = new Promise((resolve, reject) => {
             $("#attack").click(function () {
                 let damage =
-                    pokemonTurn.data.attack - pokemonNot.data.defense / 2;
+                    (pokemonTurn.data.attack - pokemonNot.data.defense / 2) *
+                    types[pokemonTurn.data.energy_id][
+                        pokemonNot.data.energy_id
+                    ];
                 damage < 0 ? (damage = 0) : damage;
                 log.innerHTML +=
                     capitalizeFirstLetter(pokemonTurn.data.name) +
@@ -74,8 +128,11 @@ $(document).ready(function () {
             });
             $("#special").click(function () {
                 let damage =
-                    pokemonTurn.data.special_attack -
-                    pokemonNot.data.special_defense / 2;
+                    (pokemonTurn.data.special_attack -
+                        pokemonNot.data.special_defense / 2) *
+                    types[pokemonTurn.data.energy_id][
+                        pokemonNot.data.energy_id
+                    ];
                 damage < 0 ? (damage = 0) : damage;
                 log.innerHTML +=
                     capitalizeFirstLetter(pokemonTurn.data.name) +
@@ -95,12 +152,15 @@ $(document).ready(function () {
         $("#special").off("click");
         return result;
     }
+
+    //Lance l'attaque automatique du pokemon onclick
     async function movesAuto(pokemon1, pokemon2, atk) {
         let promise = new Promise((resolve, reject) => {
             $("body").click(function () {
                 if (!atk) {
                     let damage =
-                        pokemon1.data.attack - pokemon2.data.defense / 2;
+                        (pokemon1.data.attack - pokemon2.data.defense / 2) *
+                        types[pokemon1.data.energy_id][pokemon2.data.energy_id];
                     damage < 0 ? (damage = 0) : damage;
                     log.innerHTML +=
                         capitalizeFirstLetter(pokemon1.data.name) +
@@ -115,8 +175,9 @@ $(document).ready(function () {
                     resolve();
                 } else {
                     let damage =
-                        pokemon1.data.special_attack -
-                        pokemon2.data.special_defense / 2;
+                        (pokemon1.data.special_attack -
+                            pokemon2.data.special_defense / 2) *
+                        types[pokemon1.data.energy_id][pokemon2.data.energy_id];
                     damage < 0 ? (damage = 0) : damage;
                     log.innerHTML +=
                         capitalizeFirstLetter(pokemon1.data.name) +
@@ -135,10 +196,14 @@ $(document).ready(function () {
         let result = await promise;
         return result;
     }
+
+    //Fonction de combat
     const battle = async (id1, id2, mode) => {
         let pokemon1 = myPokemon.find((pokemon) => pokemon.id == id1);
         let pokemon2 = opponentPokemon.find((pokemon) => pokemon.id == id2);
         displaySprite(pokemon1, pokemon2);
+
+        //Barre de vie des pokemons
         document.getElementById(
             "me-pv"
         ).innerHTML = `<progress id="health1" value="${pokemon1.data.pv}" max="${pokemon1.data.pv_max}"></progress>`;
@@ -148,6 +213,8 @@ $(document).ready(function () {
         updatePV(pokemon1, pokemon2);
         let pokeAttack = false;
         let turn = 0;
+
+        //Détermine qui attaque en premier en fonction de la stat de vitesse
         if (pokemon1.data.speed > pokemon2.data.speed) {
             pokeAttack = true;
         } else if (pokemon1.data.speed === pokemon2.data.speed) {
@@ -155,6 +222,8 @@ $(document).ready(function () {
         }
         let atk1 = false;
         let atk2 = false;
+
+        //Boucle de combat
         while (pokemon1.data.pv > 0 && pokemon2.data.pv > 0) {
             if (pokeAttack) {
                 pokeAttack = false;
@@ -189,6 +258,8 @@ $(document).ready(function () {
             turn++;
             log.scrollTo(0, log.scrollHeight);
         }
+
+        //Vérifie si un des pokemons est KO
         if (pokemon1.data.pv <= 0) {
             fetch("/addLevel/" + opponent.id + "/", {
                 method: "POST",
@@ -243,6 +314,8 @@ $(document).ready(function () {
                 return;
             }
             spriteMe.classList.remove("dead");
+
+            //Choix du prochain pokemon ou aléatoire en fonction du mode
             if (mode == "fullManual") {
                 const idnext = await chooseYourPokemon(myPokemon, me.username);
                 battle(idnext, id2, "fullManual");
@@ -292,6 +365,7 @@ $(document).ready(function () {
             opponentPokemon = opponentPokemon.filter(
                 (pokemon) => pokemon.id != id2
             );
+            //Vérifie si l'adversaire a encore des pokemons
             if (opponentPokemon.length == 0) {
                 alert(opponent.username + " a perdu");
                 fetch("/addFight/", {
@@ -330,6 +404,8 @@ $(document).ready(function () {
             }
         }
     };
+
+    //Fonction qui permet de choisir son pokemon
     async function chooseYourPokemon(pokemons, username) {
         modal.style.display = "block";
         images.innerHTML = "";
@@ -356,6 +432,7 @@ $(document).ready(function () {
         return result;
     }
 
+    //Initialisation de la bataille
     const init = async () => {
         for (let i = 0; i < myPokemon.length; i++) {
             levelStats(myPokemon[i]);

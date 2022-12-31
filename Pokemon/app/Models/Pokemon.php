@@ -20,7 +20,6 @@ class Pokemon extends Model
     public static function addPokemon(Request $request)
     {
         $content = json_decode($request->getContent());
-        //get data of the pokemon in the database
         $pokemon = DB::table('pokemon')->where('id', $content->pokemonId)->first();
         if (Energy::checkEnergy($content->userId, $pokemon->energy_id)) {
             DB::table('pc')->insert([
@@ -29,6 +28,9 @@ class Pokemon extends Model
                 'level' => 1,
                 'team' => false,
             ]);
+            echo json_encode('success');
+        } else {
+            echo json_encode('energyError');
         }
     }
     public static function getPokemonById($id)
